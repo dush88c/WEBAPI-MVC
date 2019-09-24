@@ -1,0 +1,81 @@
+﻿
+@model  List<SurvayArm.Application.Dto.UserSurvayDto>
+
+<div class="row">
+    <div class="form-group col-md-12 ">
+        <div id="userSurvayGrid"></div> 
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var users = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Users));
+    var userSurvays =  @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model , new Newtonsoft.Json.JsonSerializerSettings() { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore }));
+
+    var pageHandler = {
+
+        initalize: function () {
+
+            $("#userSurvayGrid").ejGrid({
+                editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
+                toolbarSettings: {
+                    showToolbar: true,
+                    toolbarItems: [
+                        ej.Grid.ToolBarItems.Add, ej.Grid.ToolBarItems.Edit, ej.Grid.ToolBarItems.Delete,
+                        ej.Grid.ToolBarItems.Update, ej.Grid.ToolBarItems.Cancel
+                    ]
+                },
+                dataSource: userSurvays,
+                actionComplete: pageHandler.gridActionComplete,
+                endEdit: pageHandler.gridRecordAddorEdit,
+                endAdd: pageHandler.gridRecordAddorEdit,
+                isResponsive: true,
+                columns: [
+                    { field: "Id", isPrimaryKey: true, visible: false },
+                    { field: "UserId", headerText: 'User Name', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "Id", foreignKeyValue: "FullName", dataSource: users, validationRules: { required: true }, enableFilterSearch: true },
+                    //{ field: "CreatedBy", visible: false },
+                    //{ field: "CreatedDate", visible: false },
+                    //{ field: "IsActive", visible: false }
+                ]
+            });
+        },
+        gridRecordAddorEdit: function (sender) {
+
+            var users = sender.model.dataSource;
+            var userSelected = sender.data;
+            if (userSelected.UserId === null) {
+                notification("Error", "Please select a user", "error");
+                $("#userSurvayGrid").ejGrid("startEdit", $("#userSurvayGrid .e-gridcontent tr").first());
+                return;
+            }
+            var ids = $.grep(users, function (p) {                
+                return p.UserId === userSelected.UserId;
+            });
+
+            if (ids) {
+                if (ids.length > 1) {
+                    notification("Error", "User is already assigned", "error");
+                    $("#userSurvayGrid").ejGrid("startEdit", $("#userSurvayGrid .e-gridcontent tr").first());                    s                    
+                }
+            }
+        },
+
+        gridActionComplete: function (sender) {
+
+            if (sender.requestType === "beginedit" || sender.requestType === "add") {
+                var dropdownObj = $("#" + this._id + "UserId").ejDropDownList('instance'); /* Get the object of UserId column ejDropDownList */
+                dropdownObj.option({ enableFilterSearch: true });
+            }
+            //if (sender.type === "actionComplete" && (sender.requestType === "save" || sender.requestType === "update" || sender.requestType === "delete")) {
+            //    var usersList = $("#userSurvayGrid").ejGrid('instance').model.dataSource;
+
+            //}
+        }
+    };   
+
+    (function () {
+        pageHandler.initalize();
+    })();   
+
+</script>

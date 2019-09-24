@@ -1,0 +1,48 @@
+﻿@using SurvayArm.Application.Enum
+@using Newtonsoft.Json
+@model  App.Models.AppModel.DeviceManagerViewModel
+
+@using (Html.BeginForm("Update", "DeviceManager", FormMethod.Post, new { id = "updateForm" }))
+{
+    @Html.HiddenFor(x => x.Id);
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <label>Brand</label>
+            <select class="form-control" id="DeviceBrand" />
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Model</label>
+            <input type="text" class="form-control" placeholder="Device Model Name" id="DeviceModel" value="@Model.DeviceModelName">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Id</label>
+            <input type="text" class="form-control" placeholder="Device Id" id="DeviceId" value="@Model.DeviceId">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+            <button class="btn btn-danger btn-primary" id="modal-cancel" type="button"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    var deviceBrands = @Html.Raw(JsonConvert.SerializeObject(EnumHelper.GetSelectList(typeof(EnumDeviceBrand))));
+
+    (function () {
+        $("#DeviceBrand").ejDropDownList({ width: 200, height: 30, popupHeight : 300, dataSource: deviceBrands, value: @Model.DeviceBrandId , fields: { text: 'Text', value: 'Value' }, watermarkText: "Select", enableAnimation: true, enableFilterSearch: true });
+
+        $("#updateForm").submit(function (event) {
+
+            event.preventDefault();
+            crudOperationHandler.onClickUpdateBtn($(this));
+        });
+
+        $("#modal-cancel").on('click', function () {
+            updateModal.close();
+        });
+
+    })();
+</script>

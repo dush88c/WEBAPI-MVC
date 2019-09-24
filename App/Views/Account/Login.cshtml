@@ -1,0 +1,86 @@
+﻿@using App.Models
+@model LoginViewModel
+
+<div id="login-page">
+    <div class="container">
+       @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-login" }))
+       {
+        @Html.AntiForgeryToken()
+            <h2 class="form-login-heading">sign in now</h2>
+            <div class="login-wrap">
+                <div class="profile" style="width: 140px;margin-left: 70px;">
+                    <div class="profile_center">
+                        <img src="~/Content/WebTheme/Images/image-LOGO.png" alt="..." class="img-circle profile_img">
+                    </div>                    
+                </div>
+                <input type="Email" class="form-control" placeholder="User Id" autofocus id="Email" name="Email">
+                <br>
+                <input type="password" class="form-control" placeholder="Password" id="Password" name="Password">
+                <label class="checkbox">
+                    <span class="pull-right">
+                        <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
+
+                    </span>
+                </label>
+                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+                <hr>
+
+                <div class="registration">
+                    Don't have an account yet?<br />
+                    <a href="mailto:admin@survayArm.com?Subject=Please%20create%20an%20account%20for%20me" target="_top">
+                        Please request from Administartor
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Forgot Password ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                            <button class="btn btn-theme" type="button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+       }
+
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/Scripts/WebTheme/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+        var position = 0,
+            images = [
+                '/Content/WebTheme/Images/loginPage_image4.jpg',
+                '/Content/WebTheme/Images/loginPage_image12.jpg',
+                '/Content/WebTheme/Images/loginPage_image8.jpg',
+                '/Content/WebTheme/Images/loginPage_image14.jpg',
+                '/Content/WebTheme/Images/loginPage_image7.jpg',
+                '/Content/WebTheme/Images/loginPage_image9.jpg',
+                '/Content/WebTheme/Images/loginPage_image10.jpg',
+                '/Content/WebTheme/Images/loginPage_image11.jpg',                
+                '/Content/WebTheme/Images/loginPage_image13.jpg',                
+                '/Content/WebTheme/Images/loginPage_image16.jpg',
+                '/Content/WebTheme/Images/loginPage_image15.jpg'
+            ];
+
+        $.backstretch(images, {fade: 2500, duration: 4000 });             
+
+    </script>
+
+}

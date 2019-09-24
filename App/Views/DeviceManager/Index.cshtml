@@ -1,0 +1,433 @@
+﻿@using App.Models.AppModel
+@using Syncfusion.JavaScript.Models
+@using SurvayArm.Application.Enum
+<div class="right_col" role="main">
+
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Device Registration</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div> <br />       
+        <div class="row">
+            <div class="box no-border">
+                <div class="box-header with-border">
+                </div>
+                <div class="box-body">
+                    @(Html.EJ().Grid<DeviceManagerViewModel>("deviceGrid")
+                          .Datasource(ds => ds.URL(@Url.Action("GetAllDevicesForGrid", "DeviceManager")).Adaptor(AdaptorType.UrlAdaptor))
+                          .AllowPaging()
+                          .AllowSorting()
+                          .AllowFiltering()
+                          .FilterSettings(f => { f.ShowFilterBarStatus(false);})
+                          .IsResponsive(true)
+                          .MinWidth(600)
+                          .ToolbarSettings(toolbar =>
+                          {
+                              if (User.IsInRole("Admin"))
+                              {
+                                  toolbar.ShowToolbar().CustomToolbarItems(new List<object>
+                              {
+                                      new CustomToolbarItem {TemplateID = "#Add", Text = "Add New"},
+                                      new CustomToolbarItem {TemplateID = "#Update", Text = "Update"},
+                                      new CustomToolbarItem {TemplateID = "#Delete", Text = "Delete"},
+                                      new CustomToolbarItem {TemplateID = "#Activate", Text = "Activate"},
+                                      new CustomToolbarItem {TemplateID = "#refresh", Text = "Refresh"}
+
+                                  });
+                              }
+                          })
+                          .EditSettings(edit => { edit.AllowEditOnDblClick(false); })
+                          .ClientSideEvents(evt =>
+                          {
+                              evt.ActionFailure("gridActionEvent.failureMessage");
+                              evt.ToolbarClick("toolbarClickEvent.onClickToolbar");
+                              evt.ActionBegin("gridActionEvent.onBegin");
+                              evt.ActionComplete("gridActionEvent.onComplete");
+                          })
+                          .Columns(col =>
+                          {
+                              col.Field(p => p.Id).Visible(false).IsPrimaryKey(true).Add();
+                              col.Field(p => p.DeviceId).HeaderText("Device Id").TextAlign(TextAlign.Left).AllowSorting(true).AllowFiltering(true).Add();
+                              col.Field(p => p.DeviceBrandName).HeaderText("Device Brand").FilterBarTemplate(filterbar => filterbar.Write("dropdown_write").Read("dropdown_read")).TextAlign(TextAlign.Left).AllowSorting(true).Add();
+                              col.Field(p => p.DeviceModelName).HeaderText("Device Model").TextAlign(TextAlign.Left).AllowSorting(true).AllowFiltering(true).Add();
+                              col.Field(p => p.CreatedBy).HeaderText("Last Updated By").TextAlign(TextAlign.Left).AllowFiltering(true).AllowSorting(true).Add();
+                              col.Field(p => p.IsActive).HeaderText("Is Active").Template("#IsActiveTemplate").FilterBarTemplate(filterbar => filterbar.Write("isActiveDropdown_Write").Read("isActiveDropdown_Read"))
+                                                        .TextAlign(TextAlign.Left).AllowFiltering(true).Add();
+                          }));
+                </div>
+                <div class="overlay">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script type="text/x-jsrender" id="IsActiveTemplate">
+
+    {{if IsActive == true}}
+    <span class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></span>
+    {{else IsActive == false}}
+    <span class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></span>
+    {{/if}}
+</script>
+<script type="text/x-jsrender" id="Add">
+    <span id="editJobCard"><a class="e-toolbaricons e-icon"><i class="fa fa-plus white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Update">
+    <span id="editJobCard"><a class="e-toolbaricons e-icon"><i class="fa fa-pencil white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Delete">
+    <span id="deleteTemplate"><a class="e-toolbaricons e-icon"><i class="fa fa-trash white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Activate">
+    <span id="activateTemplate"><a class="e-toolbaricons e-icon"><i class="fa fa-check-circle-o white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="refresh">
+    <span id="refresh"><a class="e-toolbaricons e-icon"><i class="fa fa-refresh white-bg"></i></a></span>
+</script>
+
+@section Scripts{
+    <script type="text/javascript">
+        var loadingGrid = $("div.box").find(".overlay");
+        var CreateModal, updateModal;
+
+        var toolbarClickEvent = {
+            onClickToolbar: function (sender) {
+                var targetId = sender.itemName;
+                var gridObj = $("#deviceGrid").ejGrid("instance");
+                var selectedRow;
+
+                if (targetId === "Update") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                         toolbarClickEvent.onGridEdit(selectedRow);
+
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+
+                } else if (targetId === "Add"){
+                    toolbarClickEvent.onGridAdd(selectedRow);
+                } else if (targetId === "refresh") {
+                    gridObj.refreshContent();
+                } else if (targetId === "Delete") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridDelete(selectedRow);
+                    }
+                } else if (targetId === "Activate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridActivate(selectedRow);
+                    }
+                }
+            },
+            onGridAdd: function () {
+                 $.ajax({
+                    url: "@Url.Action("GetNewDeviceManagerView", "DeviceManager")",
+                    method: "GET"
+                }).done(function(response) {
+                    if (response) {
+                 CreateModal =   $.dialog({
+                            title: "Register a device",
+                            content: response,
+                            columnClass: "m",
+                            draggable: true,
+                            type: 'blue',
+                            animationSpeed: 1200,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close'
+                        });
+                    }
+                });
+            },
+            onGridEdit: function (row) {
+
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].Id;
+                $.ajax({
+                    url: "@Url.Action("GetDeviceEditorView", "DeviceManager")",
+                    method: "GET",
+                    data: { id: id }
+                }).done(function (response) {
+                    if (response) {
+                        updateModal = $.dialog({
+                            icon: 'fa fa-spinner fa-spin',
+                            title: "Update device information - " + row[0].DeviceId,
+                            content: response,
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1500,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            columnClass: "m",
+                            type: 'blue'
+                        });
+                    } else {
+                        notification("Error", "Error in updating", "error");
+                        return false;
+                    }
+                    $(loadingGrid).addClass('hidden');
+                    return true;
+                });
+
+            },
+            onGridDelete: function (row) {
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].Id;
+                if (row[0].IsActive === false) {
+                    notification("Error", "Selected device is already inactive", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    content: 'Are You sure to inactive the survay ?',
+                    type: 'red',
+                    closeIcon: true,
+                    closeIconClass: 'fa fa-close',
+                    animationSpeed: 1500,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                $.ajax({
+                                    url: "@Url.Action("Activation", "DeviceManager")",
+                                    dataType: "json",
+                                    method: "POST",
+                                    data: { id: id, isActive: false }
+                                }).done(function (response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly inactive", "success");
+                                    } else {
+                                        notification("Error", "Error in Inactive", "error");
+                                    }
+
+                                    var gridObj = $("#deviceGrid").ejGrid("instance");
+                                    gridObj.refreshContent();
+                                    $(loadingGrid).addClass('hidden');
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $(loadingGrid).addClass('hidden');
+                            }
+                        }
+                    }
+                });
+            },
+
+            onGridActivate: function (row) {
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].Id;
+                if (row[0].IsActive === true) {
+                    notification("Error", "Selected device is already active", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    content: 'Are You sure to re-active the survay ?',
+                    type: 'green',
+                    closeIcon: true,
+                    closeIconClass: 'fa fa-close',
+                    animationSpeed: 1500,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                $.ajax({
+                                    url: "@Url.Action("Activation", "DeviceManager")",
+                                    dataType: "json",
+                                    method: "POST",
+                                    data: { id: id, isActive: true }
+                                }).done(function (response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly re-active", "success");
+                                    } else {
+                                        notification("Error", "Error in re-active", "error");
+                                    }
+
+                                    var gridObj = $("#deviceGrid").ejGrid("instance");
+                                    gridObj.refreshContent();
+                                    $(loadingGrid).addClass('hidden');
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $(loadingGrid).addClass('hidden');
+                            }
+                        }
+                    }
+                });
+            }
+        };
+
+        var crudOperationHandler = {
+
+            onClickSaveBtn: function (formData) {
+                var deviceId = formData.find("input[id='DeviceId']").val();
+                var deviceModel = formData.find("input[id='DeviceModel']").val();
+                var deviceBrandId = +$("#DeviceBrand").data("ejDropDownList").getSelectedValue();
+
+                var model = {
+                    DeviceId: deviceId,
+                    DeviceModelName: deviceModel,
+                    DeviceBrandId: deviceBrandId
+                }
+
+                if (isFormDataValid(model)) {
+
+                    $.ajax({
+                        url: "@Url.Action("Insert", "DeviceManager")",
+                        dataType: "json",
+                        method: "POST",
+                        data: { model: JSON.stringify(model) }
+                    }).done(function(response) {
+                        if (response.status) {
+                            notification("Success", "Device has been Successfully registered", "success");
+                        } else {
+                            notification("Error", response.message, "error");
+                            return false;
+                        }
+                        CreateModal.close();
+
+                        var gridObj = $("#deviceGrid").ejGrid("instance");
+                        gridObj.refreshContent();
+                        $(loadingGrid).addClass('hidden');
+                    });
+                }
+
+            },
+            onClickUpdateBtn: function (formData) {
+
+                var id = +formData.find("input[id='Id']").val();
+                var deviceId = formData.find("input[id='DeviceId']").val();
+                var deviceModel = formData.find("input[id='DeviceModel']").val();
+                var deviceBrandId = +$("#DeviceBrand").data("ejDropDownList").getSelectedValue();
+
+                var model = {
+                    Id : id,
+                    DeviceId: deviceId,
+                    DeviceModelName: deviceModel,
+                    DeviceBrandId: deviceBrandId
+                }
+
+                if (isFormDataValid(model)) {
+
+                    $.ajax({
+                        url: "@Url.Action("Update", "DeviceManager")",
+                        dataType: "json",
+                        method: "PUT",
+                        data: { model: JSON.stringify(model) }
+                    }).done(function(response) {
+                        if (response.status) {
+                            notification("Success", "Successfully updated", "success");
+                        } else {
+                            notification("Error", response.message, "error");
+                            return false;
+                                
+                        }
+                        updateModal.close();
+
+                        var gridObj = $("#deviceGrid").ejGrid("instance");
+                        gridObj.refreshContent();
+                        $(loadingGrid).addClass('hidden');
+                    });
+                }
+
+            }
+        };
+
+        function isFormDataValid(model) {
+            var valid = true;
+            if (!model.DeviceId) {
+                notification("Error", "Please file device id", "error");               
+                valid = false;
+            }
+            if (!model.DeviceModelName && valid) {
+                notification("Error", "Please fill device model name", "error");
+                valid = false;
+            }
+            if (!model.DeviceBrandId && valid) {
+                notification("Error", "Please select a brand", "error");
+                valid = false;
+            }
+
+            return valid;
+
+        }
+
+        var gridActionEvent = {
+            onComplete: function() {
+                $(loadingGrid).addClass('hidden');
+            },
+            onBegin: function() {
+
+                $(loadingGrid).removeClass('hidden');
+            },
+            failureMessage: function(args) {
+                notification("Error", "Error occured", "error");
+            }
+        }
+
+        function dropdown_write(args) {
+           var brands =    @Html.Raw(Json.Encode((IEnumerable<SelectListItem>)EnumHelper.GetSelectList(typeof(EnumDeviceBrand))));
+           brands.unshift({ Text: "Select", Value: "clear" });
+            args.element.ejDropDownList({ width: "100%", dataSource: brands, fields: { text: 'Text', value: 'Value' }, change: ej.proxy(args.column.filterBarTemplate.read, this, args) })
+        }
+
+        function dropdown_read(args) {
+           
+            if (args.element.val() == "clear") {
+                this.clearFiltering(args.column.field);
+                args.element.val("")
+            }
+            this.filterColumn(args.column.field, "equal", args.element.val(), "and", true)
+        }
+
+        function isActiveDropdown_Write(args) {
+            var data = [{ text: "Select", value: "clear" }, { text: "Active", value: true }, { text: "InActive", value: false }];
+            args.element.ejDropDownList({ width: "100%", dataSource: data, fields: { text: 'text', value: 'value' }, change: ej.proxy(args.column.filterBarTemplate.read, this, args) })
+        }
+        function isActiveDropdown_Read(args) {
+
+            if (args.element.val() == "clear") {
+                this.clearFiltering(args.column.field);
+                args.element.val("")
+            }
+            this.filterColumn(args.column.field, "equal", args.element.val(), "and", true)
+        }
+
+    </script>
+}

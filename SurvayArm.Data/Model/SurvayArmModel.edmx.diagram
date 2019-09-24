@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66002492fa1a4bfb91801da057d5beb7" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="SurvayArmModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="SurvayArmModel.FieldOption" Width="1.5" PointX="7.5" PointY="7.125" />
+        <EntityTypeShape EntityType="SurvayArmModel.Option" Width="1.5" PointX="9.75" PointY="7.5" />
+        <EntityTypeShape EntityType="SurvayArmModel.SurvaySetting" Width="1.5" PointX="3" PointY="14.625" />
+        <EntityTypeShape EntityType="SurvayArmModel.SurvaySupervisor" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="SurvayArmModel.SurvayType" Width="1.5" PointX="3" PointY="5.125" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvaySupervisor_AspNetUsers" />
+        <AssociationConnector Association="SurvayArmModel.FK_Option_FieldOption" />
+        <EntityTypeShape EntityType="SurvayArmModel.District" Width="1.5" PointX="3" PointY="18.5" />
+        <EntityTypeShape EntityType="SurvayArmModel.Province" Width="1.5" PointX="0.75" PointY="18.625" />
+        <AssociationConnector Association="SurvayArmModel.FK_District_Province" />
+        <EntityTypeShape EntityType="SurvayArmModel.SurvayTarget" Width="1.5" PointX="5.25" PointY="16.125" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvayTarget_District" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvayTarget_Province" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvayTarget_SurvaySetting" />
+        <EntityTypeShape EntityType="SurvayArmModel.UserSurvay" Width="1.5" PointX="6" PointY="11" />
+        <AssociationConnector Association="SurvayArmModel.FK_UserSurvay_AspNetUsers" />
+        <EntityTypeShape EntityType="SurvayArmModel.Survay" Width="1.5" PointX="0.75" PointY="6.625" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvaySetting_Survay" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvaySupervisor_Survay" />
+        <AssociationConnector Association="SurvayArmModel.FK_SurvayType_SurvayType" />
+        <AssociationConnector Association="SurvayArmModel.FK_UserSurvay_Survay" />
+        <EntityTypeShape EntityType="SurvayArmModel.MatrixHeader" Width="1.5" PointX="9.75" PointY="14.125" />
+        <EntityTypeShape EntityType="SurvayArmModel.MatrixRow" Width="1.5" PointX="9.75" PointY="4.625" />
+        <AssociationConnector Association="SurvayArmModel.FK_Matrix_Header_FieldOption" />
+        <AssociationConnector Association="SurvayArmModel.FK_Matrix_Row_FieldOption" />
+        <EntityTypeShape EntityType="SurvayArmModel.Client" Width="1.5" PointX="12.375" PointY="1" />
+        <EntityTypeShape EntityType="SurvayArmModel.AnswerField" Width="1.5" PointX="5.375" PointY="0.5" />
+        <EntityTypeShape EntityType="SurvayArmModel.DeviceManager" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SurvayArmModel.AnswerSurvay" Width="1.5" PointX="14.625" PointY="3.625" />
+        <AssociationConnector Association="SurvayArmModel.FK_AnswerField_AnswerField" />
+        <AssociationConnector Association="SurvayArmModel.FK_AnswerSurvay_Client" />
+        <AssociationConnector Association="SurvayArmModel.FK_AnswerSurvay_DeviceManager" />
+        <AssociationConnector Association="SurvayArmModel.FK_AnswerSurvay_Survay" />
+        <AssociationConnector Association="SurvayArmModel.FK_AnswerSurvay_SurvayType" />
+        <EntityTypeShape EntityType="SurvayArmModel.MatrixAnswer" Width="1.5" PointX="9.75" PointY="1.25" />
+        <AssociationConnector Association="SurvayArmModel.FK_MatrixAnswer_AnswerField1" />
+        <EntityTypeShape EntityType="SurvayArmModel.Field" Width="1.5" PointX="5.25" PointY="20.875" />
+        <EntityTypeShape EntityType="SurvayArmModel.FieldDependant" Width="1.5" PointX="7.5" PointY="21.125" />
+        <AssociationConnector Association="SurvayArmModel.FK_AnswerField_Field" />
+        <AssociationConnector Association="SurvayArmModel.FK_Field_Survay1" />
+        <AssociationConnector Association="SurvayArmModel.FK_FieldDependant_Field" />
+        <AssociationConnector Association="SurvayArmModel.FK_FieldDependant_Field1" />
+        <AssociationConnector Association="SurvayArmModel.FK_FieldOption_Field" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

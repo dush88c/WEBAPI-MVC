@@ -1,0 +1,53 @@
+﻿@model App.Models.AppModel.UserViewModel
+
+@using (Html.BeginForm("ResetPassword", "UserManagement", FormMethod.Post, new { id = "userPwdForm" }))
+{
+    @Html.HiddenFor(x=>x.Token)
+    <div class="row hidden" >
+        <div class="col-sm-4 form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control input-sm" id="firstName" value="@Model.FirstName" disabled="disabled">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control input-sm"  id="lastName" value="@Model.LastName" disabled="disabled">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Email</label>
+            <input type="email" class="form-control input-sm" id="email" value="@Model.Email" disabled="disabled">
+        </div>
+    </div>
+
+    <div class="row border-head">
+        <div class="col-sm-6 form-group">
+            <label>Password</label>
+            <input type="password" class="form-control input-sm requiredField" placeholder="New Password" id="pwd">
+        </div>
+        <div class="col-sm-6 form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control input-sm requiredField" placeholder="Confirm Password" id="confirmedPwd">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
+            <button class="btn btn-danger btn-primary" id="modal-cancel" type="button"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    (function() {
+
+        $("#userPwdForm").submit(function(event) {
+            event.preventDefault();
+            gridActionEvent.onClickPwdChangeSaveBtn($(this));
+        });
+
+        $("#modal-cancel").on('click', function() {
+            userPwdUpdateModal.close();
+        });
+
+    })();
+</script>

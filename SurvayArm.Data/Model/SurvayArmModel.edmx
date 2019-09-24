@@ -1,0 +1,1743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SurvayArmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnswerSurvayId" Type="int" Nullable="false" />
+          <Property Name="FieldId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="30" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="IncludeOther" Type="nvarchar(max)" />
+          <Property Name="AttachmentType" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="AnswerSurvay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurvayId" Type="int" Nullable="false" />
+          <Property Name="SurvayTypeID" Type="int" Nullable="false" />
+          <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="ProfileImgUrl" Type="nvarchar(max)" />
+          <Property Name="BirthOfDate" Type="datetime" />
+          <Property Name="AddressLine01" Type="nvarchar(max)" />
+          <Property Name="AddressLine02" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="HomePhoneNumber" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthOfDate" Type="datetime" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DeviceBrandId" Type="int" Nullable="false" />
+          <Property Name="DeviceModelName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurvayId" Type="int" Nullable="false" />
+          <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Field_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Required" Type="bit" Nullable="false" />
+          <Property Name="VideoUrl" Type="nvarchar(max)" />
+          <Property Name="IsImageUpload" Type="bit" Nullable="false" />
+          <Property Name="IsVoiceUpload" Type="bit" Nullable="false" />
+          <Property Name="OrderNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldDependant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldId" Type="int" Nullable="false" />
+          <Property Name="DependantFieldId" Type="int" />
+          <Property Name="DependantType" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FieldOption">
+          <Key>
+            <PropertyRef Name="FieldId" />
+          </Key>
+          <Property Name="FieldId" Type="int" Nullable="false" />
+          <Property Name="Size" Type="nvarchar" MaxLength="30" />
+          <Property Name="Min_max_length_units" Type="nvarchar" MaxLength="50" />
+          <Property Name="Minlength" Type="int" Nullable="false" />
+          <Property Name="Include_other_option" Type="bit" Nullable="false" />
+          <Property Name="Integer_only" Type="bit" Nullable="false" />
+          <Property Name="Min" Type="int" Nullable="false" />
+          <Property Name="Max" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatrixAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnswerFieldId" Type="int" Nullable="false" />
+          <Property Name="Row" Type="nvarchar" MaxLength="10" />
+          <Property Name="HeaderList" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MatrixHeader">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldOptionId" Type="int" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatrixRow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldOptionId" Type="int" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldOptionId" Type="int" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Checked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Survay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoOfQuestion" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurvaySetting">
+          <Key>
+            <PropertyRef Name="SurvayId" />
+          </Key>
+          <Property Name="SurvayId" Type="int" Nullable="false" />
+          <Property Name="Target" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurvaySupervisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurvayId" Type="int" Nullable="false" />
+          <Property Name="SupervisorId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurvayTarget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurvaySettingId" Type="int" Nullable="false" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="DistrictId" Type="int" Nullable="false" />
+          <Property Name="Target" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="OptionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurvayType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurvayId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LanguageType" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSurvay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurvayId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AnswerField_AnswerField">
+          <End Role="AnswerSurvay" Type="Self.AnswerSurvay" Multiplicity="1" />
+          <End Role="AnswerField" Type="Self.AnswerField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnswerSurvay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerField">
+              <PropertyRef Name="AnswerSurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerField_Field">
+          <End Role="Field" Type="Self.Field" Multiplicity="1" />
+          <End Role="AnswerField" Type="Self.AnswerField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerField">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="AnswerSurvay" Type="Self.AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_DeviceManager">
+          <End Role="DeviceManager" Type="Self.DeviceManager" Multiplicity="1" />
+          <End Role="AnswerSurvay" Type="Self.AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_Survay">
+          <End Role="Survay" Type="Self.Survay" Multiplicity="1" />
+          <End Role="AnswerSurvay" Type="Self.AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_SurvayType">
+          <End Role="SurvayType" Type="Self.SurvayType" Multiplicity="1" />
+          <End Role="AnswerSurvay" Type="Self.AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurvayType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="SurvayTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Field_Survay1">
+          <End Role="SurvayType" Type="Self.SurvayType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Field" Type="Self.Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurvayType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Field">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldDependant_Field">
+          <End Role="Field" Type="Self.Field" Multiplicity="0..1" />
+          <End Role="FieldDependant" Type="Self.FieldDependant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FieldDependant">
+              <PropertyRef Name="DependantFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldDependant_Field1">
+          <End Role="Field" Type="Self.Field" Multiplicity="1" />
+          <End Role="FieldDependant" Type="Self.FieldDependant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FieldDependant">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldOption_Field">
+          <End Role="Field" Type="Self.Field" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FieldOption" Type="Self.FieldOption" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matrix_Header_FieldOption">
+          <End Role="FieldOption" Type="Self.FieldOption" Multiplicity="1" />
+          <End Role="MatrixHeader" Type="Self.MatrixHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="MatrixHeader">
+              <PropertyRef Name="FieldOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matrix_Row_FieldOption">
+          <End Role="FieldOption" Type="Self.FieldOption" Multiplicity="1" />
+          <End Role="MatrixRow" Type="Self.MatrixRow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="MatrixRow">
+              <PropertyRef Name="FieldOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatrixAnswer_AnswerField1">
+          <End Role="AnswerField" Type="Self.AnswerField" Multiplicity="1" />
+          <End Role="MatrixAnswer" Type="Self.MatrixAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnswerField">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatrixAnswer">
+              <PropertyRef Name="AnswerFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Option_FieldOption">
+          <End Role="FieldOption" Type="Self.FieldOption" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="FieldOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvaySetting_Survay">
+          <End Role="Survay" Type="Self.Survay" Multiplicity="1" />
+          <End Role="SurvaySetting" Type="Self.SurvaySetting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvaySetting">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvaySupervisor_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SurvaySupervisor" Type="Self.SurvaySupervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvaySupervisor">
+              <PropertyRef Name="SupervisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvaySupervisor_Survay">
+          <End Role="Survay" Type="Self.Survay" Multiplicity="1" />
+          <End Role="SurvaySupervisor" Type="Self.SurvaySupervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvaySupervisor">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayTarget_District">
+          <End Role="District" Type="Self.District" Multiplicity="1" />
+          <End Role="SurvayTarget" Type="Self.SurvayTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvayTarget">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayTarget_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="SurvayTarget" Type="Self.SurvayTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvayTarget">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayTarget_SurvaySetting">
+          <End Role="SurvaySetting" Type="Self.SurvaySetting" Multiplicity="1" />
+          <End Role="SurvayTarget" Type="Self.SurvayTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurvaySetting">
+              <PropertyRef Name="SurvayId" />
+            </Principal>
+            <Dependent Role="SurvayTarget">
+              <PropertyRef Name="SurvaySettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayType_SurvayType">
+          <End Role="Survay" Type="Self.Survay" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SurvayType" Type="Self.SurvayType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvayType">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSurvay_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserSurvay" Type="Self.UserSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSurvay">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSurvay_Survay">
+          <End Role="Survay" Type="Self.Survay" Multiplicity="1" />
+          <End Role="UserSurvay" Type="Self.UserSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSurvay">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SurvayArmModelStoreContainer">
+          <EntitySet Name="AnswerField" EntityType="Self.AnswerField" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnswerSurvay" EntityType="Self.AnswerSurvay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceManager" EntityType="Self.DeviceManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldDependant" EntityType="Self.FieldDependant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldOption" EntityType="Self.FieldOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatrixAnswer" EntityType="Self.MatrixAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatrixHeader" EntityType="Self.MatrixHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatrixRow" EntityType="Self.MatrixRow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Option" EntityType="Self.Option" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Survay" EntityType="Self.Survay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurvaySetting" EntityType="Self.SurvaySetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurvaySupervisor" EntityType="Self.SurvaySupervisor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurvayTarget" EntityType="Self.SurvayTarget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurvayType" EntityType="Self.SurvayType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSurvay" EntityType="Self.UserSurvay" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnswerField_AnswerField" Association="Self.FK_AnswerField_AnswerField">
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvay" />
+            <End Role="AnswerField" EntitySet="AnswerField" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerField_Field" Association="Self.FK_AnswerField_Field">
+            <End Role="Field" EntitySet="Field" />
+            <End Role="AnswerField" EntitySet="AnswerField" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_Client" Association="Self.FK_AnswerSurvay_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_DeviceManager" Association="Self.FK_AnswerSurvay_DeviceManager">
+            <End Role="DeviceManager" EntitySet="DeviceManager" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_Survay" Association="Self.FK_AnswerSurvay_Survay">
+            <End Role="Survay" EntitySet="Survay" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_SurvayType" Association="Self.FK_AnswerSurvay_SurvayType">
+            <End Role="SurvayType" EntitySet="SurvayType" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_Province" Association="Self.FK_District_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Field_Survay1" Association="Self.FK_Field_Survay1">
+            <End Role="SurvayType" EntitySet="SurvayType" />
+            <End Role="Field" EntitySet="Field" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldDependant_Field" Association="Self.FK_FieldDependant_Field">
+            <End Role="Field" EntitySet="Field" />
+            <End Role="FieldDependant" EntitySet="FieldDependant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldDependant_Field1" Association="Self.FK_FieldDependant_Field1">
+            <End Role="Field" EntitySet="Field" />
+            <End Role="FieldDependant" EntitySet="FieldDependant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldOption_Field" Association="Self.FK_FieldOption_Field">
+            <End Role="Field" EntitySet="Field" />
+            <End Role="FieldOption" EntitySet="FieldOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrix_Header_FieldOption" Association="Self.FK_Matrix_Header_FieldOption">
+            <End Role="FieldOption" EntitySet="FieldOption" />
+            <End Role="MatrixHeader" EntitySet="MatrixHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrix_Row_FieldOption" Association="Self.FK_Matrix_Row_FieldOption">
+            <End Role="FieldOption" EntitySet="FieldOption" />
+            <End Role="MatrixRow" EntitySet="MatrixRow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatrixAnswer_AnswerField1" Association="Self.FK_MatrixAnswer_AnswerField1">
+            <End Role="AnswerField" EntitySet="AnswerField" />
+            <End Role="MatrixAnswer" EntitySet="MatrixAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Option_FieldOption" Association="Self.FK_Option_FieldOption">
+            <End Role="FieldOption" EntitySet="FieldOption" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvaySetting_Survay" Association="Self.FK_SurvaySetting_Survay">
+            <End Role="Survay" EntitySet="Survay" />
+            <End Role="SurvaySetting" EntitySet="SurvaySetting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvaySupervisor_AspNetUsers" Association="Self.FK_SurvaySupervisor_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SurvaySupervisor" EntitySet="SurvaySupervisor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvaySupervisor_Survay" Association="Self.FK_SurvaySupervisor_Survay">
+            <End Role="Survay" EntitySet="Survay" />
+            <End Role="SurvaySupervisor" EntitySet="SurvaySupervisor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayTarget_District" Association="Self.FK_SurvayTarget_District">
+            <End Role="District" EntitySet="District" />
+            <End Role="SurvayTarget" EntitySet="SurvayTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayTarget_Province" Association="Self.FK_SurvayTarget_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="SurvayTarget" EntitySet="SurvayTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayTarget_SurvaySetting" Association="Self.FK_SurvayTarget_SurvaySetting">
+            <End Role="SurvaySetting" EntitySet="SurvaySetting" />
+            <End Role="SurvayTarget" EntitySet="SurvayTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayType_SurvayType" Association="Self.FK_SurvayType_SurvayType">
+            <End Role="Survay" EntitySet="Survay" />
+            <End Role="SurvayType" EntitySet="SurvayType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSurvay_AspNetUsers" Association="Self.FK_UserSurvay_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserSurvay" EntitySet="UserSurvay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSurvay_Survay" Association="Self.FK_UserSurvay_Survay">
+            <End Role="Survay" EntitySet="Survay" />
+            <End Role="UserSurvay" EntitySet="UserSurvay" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SurvayArmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SurvayArmDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="SurvayArmModel.AspNetUser" />
+          <EntitySet Name="FieldOptions" EntityType="SurvayArmModel.FieldOption" />
+          <EntitySet Name="Options" EntityType="SurvayArmModel.Option" />
+          <EntitySet Name="SurvaySettings" EntityType="SurvayArmModel.SurvaySetting" />
+          <EntitySet Name="SurvaySupervisors" EntityType="SurvayArmModel.SurvaySupervisor" />
+          <EntitySet Name="SurvayTypes" EntityType="SurvayArmModel.SurvayType" />
+          <AssociationSet Name="FK_SurvaySupervisor_AspNetUsers" Association="SurvayArmModel.FK_SurvaySupervisor_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="SurvaySupervisor" EntitySet="SurvaySupervisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Option_FieldOption" Association="SurvayArmModel.FK_Option_FieldOption">
+            <End Role="FieldOption" EntitySet="FieldOptions" />
+            <End Role="Option" EntitySet="Options" />
+          </AssociationSet>
+          <EntitySet Name="Districts" EntityType="SurvayArmModel.District" />
+          <EntitySet Name="Provinces" EntityType="SurvayArmModel.Province" />
+          <AssociationSet Name="FK_District_Province" Association="SurvayArmModel.FK_District_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <EntitySet Name="SurvayTargets" EntityType="SurvayArmModel.SurvayTarget" />
+          <AssociationSet Name="FK_SurvayTarget_District" Association="SurvayArmModel.FK_SurvayTarget_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="SurvayTarget" EntitySet="SurvayTargets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayTarget_Province" Association="SurvayArmModel.FK_SurvayTarget_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="SurvayTarget" EntitySet="SurvayTargets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayTarget_SurvaySetting" Association="SurvayArmModel.FK_SurvayTarget_SurvaySetting">
+            <End Role="SurvaySetting" EntitySet="SurvaySettings" />
+            <End Role="SurvayTarget" EntitySet="SurvayTargets" />
+          </AssociationSet>
+          <EntitySet Name="UserSurvays" EntityType="SurvayArmModel.UserSurvay" />
+          <AssociationSet Name="FK_UserSurvay_AspNetUsers" Association="SurvayArmModel.FK_UserSurvay_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserSurvay" EntitySet="UserSurvays" />
+          </AssociationSet>
+          <EntitySet Name="Survays" EntityType="SurvayArmModel.Survay" />
+          <AssociationSet Name="FK_SurvaySetting_Survay" Association="SurvayArmModel.FK_SurvaySetting_Survay">
+            <End Role="Survay" EntitySet="Survays" />
+            <End Role="SurvaySetting" EntitySet="SurvaySettings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvaySupervisor_Survay" Association="SurvayArmModel.FK_SurvaySupervisor_Survay">
+            <End Role="Survay" EntitySet="Survays" />
+            <End Role="SurvaySupervisor" EntitySet="SurvaySupervisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurvayType_SurvayType" Association="SurvayArmModel.FK_SurvayType_SurvayType">
+            <End Role="Survay" EntitySet="Survays" />
+            <End Role="SurvayType" EntitySet="SurvayTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSurvay_Survay" Association="SurvayArmModel.FK_UserSurvay_Survay">
+            <End Role="Survay" EntitySet="Survays" />
+            <End Role="UserSurvay" EntitySet="UserSurvays" />
+          </AssociationSet>
+          <EntitySet Name="MatrixHeaders" EntityType="SurvayArmModel.MatrixHeader" />
+          <EntitySet Name="MatrixRows" EntityType="SurvayArmModel.MatrixRow" />
+          <AssociationSet Name="FK_Matrix_Header_FieldOption" Association="SurvayArmModel.FK_Matrix_Header_FieldOption">
+            <End Role="FieldOption" EntitySet="FieldOptions" />
+            <End Role="MatrixHeader" EntitySet="MatrixHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrix_Row_FieldOption" Association="SurvayArmModel.FK_Matrix_Row_FieldOption">
+            <End Role="FieldOption" EntitySet="FieldOptions" />
+            <End Role="MatrixRow" EntitySet="MatrixRows" />
+          </AssociationSet>
+          <EntitySet Name="Clients" EntityType="SurvayArmModel.Client" />
+          <EntitySet Name="AnswerFields" EntityType="SurvayArmModel.AnswerField" />
+          <EntitySet Name="DeviceManagers" EntityType="SurvayArmModel.DeviceManager" />
+          <EntitySet Name="AnswerSurvays" EntityType="SurvayArmModel.AnswerSurvay" />
+          <AssociationSet Name="FK_AnswerField_AnswerField" Association="SurvayArmModel.FK_AnswerField_AnswerField">
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvays" />
+            <End Role="AnswerField" EntitySet="AnswerFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_Client" Association="SurvayArmModel.FK_AnswerSurvay_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_DeviceManager" Association="SurvayArmModel.FK_AnswerSurvay_DeviceManager">
+            <End Role="DeviceManager" EntitySet="DeviceManagers" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_Survay" Association="SurvayArmModel.FK_AnswerSurvay_Survay">
+            <End Role="Survay" EntitySet="Survays" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnswerSurvay_SurvayType" Association="SurvayArmModel.FK_AnswerSurvay_SurvayType">
+            <End Role="SurvayType" EntitySet="SurvayTypes" />
+            <End Role="AnswerSurvay" EntitySet="AnswerSurvays" />
+          </AssociationSet>
+          <EntitySet Name="MatrixAnswers" EntityType="SurvayArmModel.MatrixAnswer" />
+          <AssociationSet Name="FK_MatrixAnswer_AnswerField1" Association="SurvayArmModel.FK_MatrixAnswer_AnswerField1">
+            <End Role="AnswerField" EntitySet="AnswerFields" />
+            <End Role="MatrixAnswer" EntitySet="MatrixAnswers" />
+          </AssociationSet>
+          <EntitySet Name="Fields" EntityType="SurvayArmModel.Field" />
+          <EntitySet Name="FieldDependants" EntityType="SurvayArmModel.FieldDependant" />
+          <AssociationSet Name="FK_AnswerField_Field" Association="SurvayArmModel.FK_AnswerField_Field">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="AnswerField" EntitySet="AnswerFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Field_Survay1" Association="SurvayArmModel.FK_Field_Survay1">
+            <End Role="SurvayType" EntitySet="SurvayTypes" />
+            <End Role="Field" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldDependant_Field" Association="SurvayArmModel.FK_FieldDependant_Field">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="FieldDependant" EntitySet="FieldDependants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldDependant_Field1" Association="SurvayArmModel.FK_FieldDependant_Field1">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="FieldDependant" EntitySet="FieldDependants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldOption_Field" Association="SurvayArmModel.FK_FieldOption_Field">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="FieldOption" EntitySet="FieldOptions" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImgUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthOfDate" Type="DateTime" Precision="3" />
+          <Property Name="AddressLine01" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine02" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HomePhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurvaySupervisors" Relationship="SurvayArmModel.FK_SurvaySupervisor_AspNetUsers" FromRole="AspNetUser" ToRole="SurvaySupervisor" />
+          <NavigationProperty Name="UserSurvays" Relationship="SurvayArmModel.FK_UserSurvay_AspNetUsers" FromRole="AspNetUser" ToRole="UserSurvay" />
+        </EntityType>
+        <EntityType Name="FieldOption">
+          <Key>
+            <PropertyRef Name="FieldId" />
+          </Key>
+          <Property Name="FieldId" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Min_max_length_units" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Minlength" Type="Int32" Nullable="false" />
+          <Property Name="Include_other_option" Type="Boolean" Nullable="false" />
+          <Property Name="Integer_only" Type="Boolean" Nullable="false" />
+          <Property Name="Min" Type="Int32" Nullable="false" />
+          <Property Name="Max" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Options" Relationship="SurvayArmModel.FK_Option_FieldOption" FromRole="FieldOption" ToRole="Option" />
+          <NavigationProperty Name="MatrixHeaders" Relationship="SurvayArmModel.FK_Matrix_Header_FieldOption" FromRole="FieldOption" ToRole="MatrixHeader" />
+          <NavigationProperty Name="MatrixRows" Relationship="SurvayArmModel.FK_Matrix_Row_FieldOption" FromRole="FieldOption" ToRole="MatrixRow" />
+          <NavigationProperty Name="Field" Relationship="SurvayArmModel.FK_FieldOption_Field" FromRole="FieldOption" ToRole="Field" />
+        </EntityType>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldOptionId" Type="Int32" Nullable="false" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Checked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FieldOption" Relationship="SurvayArmModel.FK_Option_FieldOption" FromRole="Option" ToRole="FieldOption" />
+        </EntityType>
+        <EntityType Name="SurvaySetting">
+          <Key>
+            <PropertyRef Name="SurvayId" />
+          </Key>
+          <Property Name="SurvayId" Type="Int32" Nullable="false" />
+          <Property Name="Target" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SurvayTargets" Relationship="SurvayArmModel.FK_SurvayTarget_SurvaySetting" FromRole="SurvaySetting" ToRole="SurvayTarget" />
+          <NavigationProperty Name="Survay" Relationship="SurvayArmModel.FK_SurvaySetting_Survay" FromRole="SurvaySetting" ToRole="Survay" />
+        </EntityType>
+        <EntityType Name="SurvaySupervisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurvayId" Type="Int32" Nullable="false" />
+          <Property Name="SupervisorId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="SurvayArmModel.FK_SurvaySupervisor_AspNetUsers" FromRole="SurvaySupervisor" ToRole="AspNetUser" />
+          <NavigationProperty Name="Survay" Relationship="SurvayArmModel.FK_SurvaySupervisor_Survay" FromRole="SurvaySupervisor" ToRole="Survay" />
+        </EntityType>
+        <EntityType Name="SurvayType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurvayId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageType" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Survay" Relationship="SurvayArmModel.FK_SurvayType_SurvayType" FromRole="SurvayType" ToRole="Survay" />
+          <NavigationProperty Name="AnswerSurvays" Relationship="SurvayArmModel.FK_AnswerSurvay_SurvayType" FromRole="SurvayType" ToRole="AnswerSurvay" />
+          <NavigationProperty Name="Fields" Relationship="SurvayArmModel.FK_Field_Survay1" FromRole="SurvayType" ToRole="Field" />
+        </EntityType>
+        <Association Name="FK_SurvaySupervisor_AspNetUsers">
+          <End Type="SurvayArmModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvaySupervisor" Role="SurvaySupervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvaySupervisor">
+              <PropertyRef Name="SupervisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Option_FieldOption">
+          <End Type="SurvayArmModel.FieldOption" Role="FieldOption" Multiplicity="1" />
+          <End Type="SurvayArmModel.Option" Role="Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="FieldOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Province" Relationship="SurvayArmModel.FK_District_Province" FromRole="District" ToRole="Province" />
+          <NavigationProperty Name="SurvayTargets" Relationship="SurvayArmModel.FK_SurvayTarget_District" FromRole="District" ToRole="SurvayTarget" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Districts" Relationship="SurvayArmModel.FK_District_Province" FromRole="Province" ToRole="District" />
+          <NavigationProperty Name="SurvayTargets" Relationship="SurvayArmModel.FK_SurvayTarget_Province" FromRole="Province" ToRole="SurvayTarget" />
+        </EntityType>
+        <Association Name="FK_District_Province">
+          <End Type="SurvayArmModel.Province" Role="Province" Multiplicity="1" />
+          <End Type="SurvayArmModel.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SurvayTarget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurvaySettingId" Type="Int32" Nullable="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="Target" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="OptionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="District" Relationship="SurvayArmModel.FK_SurvayTarget_District" FromRole="SurvayTarget" ToRole="District" />
+          <NavigationProperty Name="Province" Relationship="SurvayArmModel.FK_SurvayTarget_Province" FromRole="SurvayTarget" ToRole="Province" />
+          <NavigationProperty Name="SurvaySetting" Relationship="SurvayArmModel.FK_SurvayTarget_SurvaySetting" FromRole="SurvayTarget" ToRole="SurvaySetting" />
+        </EntityType>
+        <Association Name="FK_SurvayTarget_District">
+          <End Type="SurvayArmModel.District" Role="District" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvayTarget" Role="SurvayTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvayTarget">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayTarget_Province">
+          <End Type="SurvayArmModel.Province" Role="Province" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvayTarget" Role="SurvayTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvayTarget">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayTarget_SurvaySetting">
+          <End Type="SurvayArmModel.SurvaySetting" Role="SurvaySetting" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvayTarget" Role="SurvayTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurvaySetting">
+              <PropertyRef Name="SurvayId" />
+            </Principal>
+            <Dependent Role="SurvayTarget">
+              <PropertyRef Name="SurvaySettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserSurvay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurvayId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="SurvayArmModel.FK_UserSurvay_AspNetUsers" FromRole="UserSurvay" ToRole="AspNetUser" />
+          <NavigationProperty Name="Survay" Relationship="SurvayArmModel.FK_UserSurvay_Survay" FromRole="UserSurvay" ToRole="Survay" />
+        </EntityType>
+        <Association Name="FK_UserSurvay_AspNetUsers">
+          <End Type="SurvayArmModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SurvayArmModel.UserSurvay" Role="UserSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSurvay">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Survay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfQuestion" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SurvaySetting" Relationship="SurvayArmModel.FK_SurvaySetting_Survay" FromRole="Survay" ToRole="SurvaySetting" />
+          <NavigationProperty Name="SurvaySupervisors" Relationship="SurvayArmModel.FK_SurvaySupervisor_Survay" FromRole="Survay" ToRole="SurvaySupervisor" />
+          <NavigationProperty Name="SurvayTypes" Relationship="SurvayArmModel.FK_SurvayType_SurvayType" FromRole="Survay" ToRole="SurvayType" />
+          <NavigationProperty Name="UserSurvays" Relationship="SurvayArmModel.FK_UserSurvay_Survay" FromRole="Survay" ToRole="UserSurvay" />
+          <NavigationProperty Name="AnswerSurvays" Relationship="SurvayArmModel.FK_AnswerSurvay_Survay" FromRole="Survay" ToRole="AnswerSurvay" />
+        </EntityType>
+        <Association Name="FK_SurvaySetting_Survay">
+          <End Type="SurvayArmModel.Survay" Role="Survay" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvaySetting" Role="SurvaySetting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvaySetting">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvaySupervisor_Survay">
+          <End Type="SurvayArmModel.Survay" Role="Survay" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvaySupervisor" Role="SurvaySupervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvaySupervisor">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurvayType_SurvayType">
+          <End Type="SurvayArmModel.Survay" Role="Survay" Multiplicity="1" />
+          <End Type="SurvayArmModel.SurvayType" Role="SurvayType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurvayType">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSurvay_Survay">
+          <End Type="SurvayArmModel.Survay" Role="Survay" Multiplicity="1" />
+          <End Type="SurvayArmModel.UserSurvay" Role="UserSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSurvay">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MatrixHeader">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldOptionId" Type="Int32" Nullable="false" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldOption" Relationship="SurvayArmModel.FK_Matrix_Header_FieldOption" FromRole="MatrixHeader" ToRole="FieldOption" />
+        </EntityType>
+        <EntityType Name="MatrixRow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldOptionId" Type="Int32" Nullable="false" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldOption" Relationship="SurvayArmModel.FK_Matrix_Row_FieldOption" FromRole="MatrixRow" ToRole="FieldOption" />
+        </EntityType>
+        <Association Name="FK_Matrix_Header_FieldOption">
+          <End Type="SurvayArmModel.FieldOption" Role="FieldOption" Multiplicity="1" />
+          <End Type="SurvayArmModel.MatrixHeader" Role="MatrixHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="MatrixHeader">
+              <PropertyRef Name="FieldOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matrix_Row_FieldOption">
+          <End Type="SurvayArmModel.FieldOption" Role="FieldOption" Multiplicity="1" />
+          <End Type="SurvayArmModel.MatrixRow" Role="MatrixRow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="MatrixRow">
+              <PropertyRef Name="FieldOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthOfDate" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AnswerSurvays" Relationship="SurvayArmModel.FK_AnswerSurvay_Client" FromRole="Client" ToRole="AnswerSurvay" />
+        </EntityType>
+        <EntityType Name="AnswerField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerSurvayId" Type="Int32" Nullable="false" />
+          <Property Name="FieldId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IncludeOther" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AttachmentType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnswerSurvay" Relationship="SurvayArmModel.FK_AnswerField_AnswerField" FromRole="AnswerField" ToRole="AnswerSurvay" />
+          <NavigationProperty Name="MatrixAnswers" Relationship="SurvayArmModel.FK_MatrixAnswer_AnswerField1" FromRole="AnswerField" ToRole="MatrixAnswer" />
+          <NavigationProperty Name="Field" Relationship="SurvayArmModel.FK_AnswerField_Field" FromRole="AnswerField" ToRole="Field" />
+        </EntityType>
+        <EntityType Name="DeviceManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceBrandId" Type="Int32" Nullable="false" />
+          <Property Name="DeviceModelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AnswerSurvays" Relationship="SurvayArmModel.FK_AnswerSurvay_DeviceManager" FromRole="DeviceManager" ToRole="AnswerSurvay" />
+        </EntityType>
+        <EntityType Name="AnswerSurvay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurvayId" Type="Int32" Nullable="false" />
+          <Property Name="SurvayTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DeviceId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AnswerFields" Relationship="SurvayArmModel.FK_AnswerField_AnswerField" FromRole="AnswerSurvay" ToRole="AnswerField" />
+          <NavigationProperty Name="Client" Relationship="SurvayArmModel.FK_AnswerSurvay_Client" FromRole="AnswerSurvay" ToRole="Client" />
+          <NavigationProperty Name="DeviceManager" Relationship="SurvayArmModel.FK_AnswerSurvay_DeviceManager" FromRole="AnswerSurvay" ToRole="DeviceManager" />
+          <NavigationProperty Name="Survay" Relationship="SurvayArmModel.FK_AnswerSurvay_Survay" FromRole="AnswerSurvay" ToRole="Survay" />
+          <NavigationProperty Name="SurvayType" Relationship="SurvayArmModel.FK_AnswerSurvay_SurvayType" FromRole="AnswerSurvay" ToRole="SurvayType" />
+        </EntityType>
+        <Association Name="FK_AnswerField_AnswerField">
+          <End Type="SurvayArmModel.AnswerSurvay" Role="AnswerSurvay" Multiplicity="1" />
+          <End Type="SurvayArmModel.AnswerField" Role="AnswerField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnswerSurvay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerField">
+              <PropertyRef Name="AnswerSurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_Client">
+          <End Type="SurvayArmModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="SurvayArmModel.AnswerSurvay" Role="AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_DeviceManager">
+          <End Type="SurvayArmModel.DeviceManager" Role="DeviceManager" Multiplicity="1" />
+          <End Type="SurvayArmModel.AnswerSurvay" Role="AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_Survay">
+          <End Type="SurvayArmModel.Survay" Role="Survay" Multiplicity="1" />
+          <End Type="SurvayArmModel.AnswerSurvay" Role="AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnswerSurvay_SurvayType">
+          <End Type="SurvayArmModel.SurvayType" Role="SurvayType" Multiplicity="1" />
+          <End Type="SurvayArmModel.AnswerSurvay" Role="AnswerSurvay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurvayType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerSurvay">
+              <PropertyRef Name="SurvayTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MatrixAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerFieldId" Type="Int32" Nullable="false" />
+          <Property Name="Row" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HeaderList" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnswerField" Relationship="SurvayArmModel.FK_MatrixAnswer_AnswerField1" FromRole="MatrixAnswer" ToRole="AnswerField" />
+        </EntityType>
+        <Association Name="FK_MatrixAnswer_AnswerField1">
+          <End Type="SurvayArmModel.AnswerField" Role="AnswerField" Multiplicity="1" />
+          <End Type="SurvayArmModel.MatrixAnswer" Role="MatrixAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnswerField">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatrixAnswer">
+              <PropertyRef Name="AnswerFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurvayId" Type="Int32" Nullable="false" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Field_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Required" Type="Boolean" Nullable="false" />
+          <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsImageUpload" Type="Boolean" Nullable="false" />
+          <Property Name="IsVoiceUpload" Type="Boolean" Nullable="false" />
+          <Property Name="OrderNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnswerFields" Relationship="SurvayArmModel.FK_AnswerField_Field" FromRole="Field" ToRole="AnswerField" />
+          <NavigationProperty Name="SurvayType" Relationship="SurvayArmModel.FK_Field_Survay1" FromRole="Field" ToRole="SurvayType" />
+          <NavigationProperty Name="FieldDependants" Relationship="SurvayArmModel.FK_FieldDependant_Field" FromRole="Field" ToRole="FieldDependant" />
+          <NavigationProperty Name="FieldDependants1" Relationship="SurvayArmModel.FK_FieldDependant_Field1" FromRole="Field" ToRole="FieldDependant" />
+          <NavigationProperty Name="FieldOption" Relationship="SurvayArmModel.FK_FieldOption_Field" FromRole="Field" ToRole="FieldOption" />
+        </EntityType>
+        <EntityType Name="FieldDependant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldId" Type="Int32" Nullable="false" />
+          <Property Name="DependantFieldId" Type="Int32" />
+          <Property Name="DependantType" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Field" Relationship="SurvayArmModel.FK_FieldDependant_Field" FromRole="FieldDependant" ToRole="Field" />
+          <NavigationProperty Name="Field1" Relationship="SurvayArmModel.FK_FieldDependant_Field1" FromRole="FieldDependant" ToRole="Field" />
+        </EntityType>
+        <Association Name="FK_AnswerField_Field">
+          <End Type="SurvayArmModel.Field" Role="Field" Multiplicity="1" />
+          <End Type="SurvayArmModel.AnswerField" Role="AnswerField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerField">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Field_Survay1">
+          <End Type="SurvayArmModel.SurvayType" Role="SurvayType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SurvayArmModel.Field" Role="Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurvayType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Field">
+              <PropertyRef Name="SurvayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldDependant_Field">
+          <End Type="SurvayArmModel.Field" Role="Field" Multiplicity="0..1" />
+          <End Type="SurvayArmModel.FieldDependant" Role="FieldDependant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FieldDependant">
+              <PropertyRef Name="DependantFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldDependant_Field1">
+          <End Type="SurvayArmModel.Field" Role="Field" Multiplicity="1" />
+          <End Type="SurvayArmModel.FieldDependant" Role="FieldDependant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FieldDependant">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldOption_Field">
+          <End Type="SurvayArmModel.Field" Role="Field" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SurvayArmModel.FieldOption" Role="FieldOption" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FieldOption">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SurvayArmModelStoreContainer" CdmEntityContainer="SurvayArmDbContext">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SurvayArmModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="HomePhoneNumber" ColumnName="HomePhoneNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine02" ColumnName="AddressLine02" />
+                <ScalarProperty Name="AddressLine01" ColumnName="AddressLine01" />
+                <ScalarProperty Name="BirthOfDate" ColumnName="BirthOfDate" />
+                <ScalarProperty Name="ProfileImgUrl" ColumnName="ProfileImgUrl" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldOptions">
+            <EntityTypeMapping TypeName="SurvayArmModel.FieldOption">
+              <MappingFragment StoreEntitySet="FieldOption">
+                <ScalarProperty Name="Max" ColumnName="Max" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="Integer_only" ColumnName="Integer_only" />
+                <ScalarProperty Name="Include_other_option" ColumnName="Include_other_option" />
+                <ScalarProperty Name="Minlength" ColumnName="Minlength" />
+                <ScalarProperty Name="Min_max_length_units" ColumnName="Min_max_length_units" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Options">
+            <EntityTypeMapping TypeName="SurvayArmModel.Option">
+              <MappingFragment StoreEntitySet="Option">
+                <ScalarProperty Name="Checked" ColumnName="Checked" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FieldOptionId" ColumnName="FieldOptionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurvaySettings">
+            <EntityTypeMapping TypeName="SurvayArmModel.SurvaySetting">
+              <MappingFragment StoreEntitySet="SurvaySetting">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Target" ColumnName="Target" />
+                <ScalarProperty Name="SurvayId" ColumnName="SurvayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurvaySupervisors">
+            <EntityTypeMapping TypeName="SurvayArmModel.SurvaySupervisor">
+              <MappingFragment StoreEntitySet="SurvaySupervisor">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="SurvayId" ColumnName="SurvayId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurvayTypes">
+            <EntityTypeMapping TypeName="SurvayArmModel.SurvayType">
+              <MappingFragment StoreEntitySet="SurvayType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LanguageType" ColumnName="LanguageType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SurvayId" ColumnName="SurvayId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="SurvayArmModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="SurvayArmModel.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurvayTargets">
+            <EntityTypeMapping TypeName="SurvayArmModel.SurvayTarget">
+              <MappingFragment StoreEntitySet="SurvayTarget">
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Target" ColumnName="Target" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="SurvaySettingId" ColumnName="SurvaySettingId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSurvays">
+            <EntityTypeMapping TypeName="SurvayArmModel.UserSurvay">
+              <MappingFragment StoreEntitySet="UserSurvay">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SurvayId" ColumnName="SurvayId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Survays">
+            <EntityTypeMapping TypeName="SurvayArmModel.Survay">
+              <MappingFragment StoreEntitySet="Survay">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="NoOfQuestion" ColumnName="NoOfQuestion" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatrixHeaders">
+            <EntityTypeMapping TypeName="SurvayArmModel.MatrixHeader">
+              <MappingFragment StoreEntitySet="MatrixHeader">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FieldOptionId" ColumnName="FieldOptionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatrixRows">
+            <EntityTypeMapping TypeName="SurvayArmModel.MatrixRow">
+              <MappingFragment StoreEntitySet="MatrixRow">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FieldOptionId" ColumnName="FieldOptionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SurvayArmModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthOfDate" ColumnName="BirthOfDate" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerFields">
+            <EntityTypeMapping TypeName="SurvayArmModel.AnswerField">
+              <MappingFragment StoreEntitySet="AnswerField">
+                <ScalarProperty Name="AttachmentType" ColumnName="AttachmentType" />
+                <ScalarProperty Name="IncludeOther" ColumnName="IncludeOther" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="AnswerSurvayId" ColumnName="AnswerSurvayId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceManagers">
+            <EntityTypeMapping TypeName="SurvayArmModel.DeviceManager">
+              <MappingFragment StoreEntitySet="DeviceManager">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DeviceModelName" ColumnName="DeviceModelName" />
+                <ScalarProperty Name="DeviceBrandId" ColumnName="DeviceBrandId" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerSurvays">
+            <EntityTypeMapping TypeName="SurvayArmModel.AnswerSurvay">
+              <MappingFragment StoreEntitySet="AnswerSurvay">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="SurvayTypeID" ColumnName="SurvayTypeID" />
+                <ScalarProperty Name="SurvayId" ColumnName="SurvayId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatrixAnswers">
+            <EntityTypeMapping TypeName="SurvayArmModel.MatrixAnswer">
+              <MappingFragment StoreEntitySet="MatrixAnswer">
+                <ScalarProperty Name="HeaderList" ColumnName="HeaderList" />
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="AnswerFieldId" ColumnName="AnswerFieldId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="SurvayArmModel.Field">
+              <MappingFragment StoreEntitySet="Field">
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="IsVoiceUpload" ColumnName="IsVoiceUpload" />
+                <ScalarProperty Name="IsImageUpload" ColumnName="IsImageUpload" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+                <ScalarProperty Name="Field_Type" ColumnName="Field_Type" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="SurvayId" ColumnName="SurvayId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldDependants">
+            <EntityTypeMapping TypeName="SurvayArmModel.FieldDependant">
+              <MappingFragment StoreEntitySet="FieldDependant">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DependantType" ColumnName="DependantType" />
+                <ScalarProperty Name="DependantFieldId" ColumnName="DependantFieldId" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

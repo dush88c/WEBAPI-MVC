@@ -1,0 +1,20 @@
+2018-05-24 22:45:36,241 [5] ERROR SurvayArm.Application.Service.SurvayService - Error :  System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 69
+2018-05-24 22:45:36,307 [5] ERROR SurvayArm.API.Controllers.SurvayController - Error : System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 78
+   at SurvayArm.API.Controllers.SurvayController.GetByCode(Int32 code) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.API\Controllers\SurvayController.cs:line 109
+2018-05-24 22:46:02,598 [7] ERROR SurvayArm.Application.Service.SurvayService - Error :  System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 69
+2018-05-24 22:46:02,621 [7] ERROR SurvayArm.API.Controllers.SurvayController - Error : System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 78
+   at SurvayArm.API.Controllers.SurvayController.GetByCode(Int32 code) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.API\Controllers\SurvayController.cs:line 109
+2018-05-24 22:46:47,486 [6] ERROR SurvayArm.Application.Service.SurvayService - Error :  System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 69
+2018-05-24 22:46:47,505 [6] ERROR SurvayArm.API.Controllers.SurvayController - Error : System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 78
+   at SurvayArm.API.Controllers.SurvayController.GetByCode(Int32 code) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.API\Controllers\SurvayController.cs:line 109
+2018-05-24 22:48:07,552 [6] ERROR SurvayArm.Application.Service.SurvayService - Error :  System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 69
+2018-05-24 22:48:07,569 [6] ERROR SurvayArm.API.Controllers.SurvayController - Error : System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.SurvayTypeService.GetSurvayTypeById(Int32 id) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\SurvayTypeService.cs:line 78
+   at SurvayArm.API.Controllers.SurvayController.GetByCode(Int32 code) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.API\Controllers\SurvayController.cs:line 109

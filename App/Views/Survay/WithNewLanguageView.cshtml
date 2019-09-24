@@ -1,0 +1,95 @@
+﻿@model App.Models.AppModel.SurvayTypeViewModel
+@{
+    ViewBag.Title = "WithNewLanguageView";
+    Layout = "~/Views/Shared/_SurvayLayout.cshtml";
+}
+
+<link href="~/Content/WebTheme/Survay/formBuilder.css" rel="stylesheet" />
+
+<div class="row">
+    <div class='fb-main col-md-8'></div>   
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    var language = +@ViewBag.Language;
+    var fields = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.fields, new Newtonsoft.Json.JsonSerializerSettings() { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore }));
+
+        $(function () {
+
+        var fb = new Formbuilder({
+            selector: '.fb-main',
+            bootstrapData: fields
+        });
+
+        fb.on('save', function (payload) {
+            var content = '' +
+                '<div class="">' +
+                '<div class="form-group">' +
+                '<label>Survay Name</label>' +
+                '<input type="text" placeholder="Survay name" class="name form-control" disabled required value =' +
+                '@Model.Survay.Name' +
+                ' />' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Description</label>' +
+                '<textarea placeholder="Description" class="description" required' +
+                ' />' +
+                '</div>' +
+                '</div>';
+
+            var jc = $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    columnClass: 's',
+                    content: content,
+                    animationSpeed: 1000,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        save:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                var desc = $(".description").val();
+                                if (!desc) {
+                                    notification("Error", "Please give the description", "error");
+                                    return false;
+                                }
+
+                                $.ajax({
+                                    url: "@Url.Action("SaveNewLanguageSurvay", "Survay")",
+                                    dataType: "json",
+                                    method: "POST",
+                                    data: { model: payload, description: desc, languageType: language, code: @Model.SurvayId}
+                                }).done(function(response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly inserted","success");
+                                    } else {
+                                        notification("Error", "Error in inserting","error");
+                                    }
+                                    setTimeout(function () {
+                                        location.href = '@Url.Action("Index" , "Survay")';
+                                    }, 1000);
+
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function() {
+                                return true;
+                            }
+                        }
+                    }
+                });
+        });
+
+    });
+    </script>
+
+}

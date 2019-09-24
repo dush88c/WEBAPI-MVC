@@ -1,0 +1,177 @@
+﻿@using SurvayArm.Application.Enum
+@using Newtonsoft.Json
+@model  IEnumerable<App.Models.AppModel.SurvayTargetViewModel>
+
+<input type="hidden" value="@Model.FirstOrDefault()?.CreatedBy"/>
+<div class="row">
+        <div class="col-md-6">
+            <label>Survay Name</label>
+            @if (ViewBag.Survay != null)
+            {
+                <input type="text" disabled="disabled" value="@ViewBag.Survay.Name" class="form-control"/>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label>Supervisor/s</label>
+            <div class="col-md-12" id="supervisorDiv">
+                @foreach (var sup in ViewBag.AllSupervisorUsers)
+                {
+                    <span>
+                        <input type="checkbox" id="@sup.Id"/>
+                        <label for="@sup.Id" style="font-weight: lighter">@string.Format("{0} {1}", sup.FirstName ,sup.LastName)</label>
+                    </span>
+                    <br/>
+                }
+                
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-4">
+    <label>Total Target</label>
+    @if (ViewBag.AllTargets != null)
+    {
+        <input type="number" id="allTotal" min="1" class="form-control" value="@ViewBag.AllTargets"/>
+    }
+    
+    </div>
+</div>
+   <br/>
+<div class="row">
+    <div class="form-group col-md-12">
+        <div id="settingGrid"></div>
+    </div>
+</div>
+
+<div class="row">
+    <span class="col-md-offset-9">
+        <span>Total</span>
+        <label id="sumOfTarget"> </label>
+    </span>
+</div>
+    <script type="text/javascript">
+
+        var targets = @Html.Raw(JsonConvert.SerializeObject(Model));
+        var allSupervisors = @Html.Raw(JsonConvert.SerializeObject(ViewBag.AllSupervisorUsers));
+        var assignedSupervisors = @Html.Raw(JsonConvert.SerializeObject(ViewBag.AssignedSupervisorUsers));
+        var districs = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Districs));
+        var provinces  = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Provinces));
+        var options = @Html.Raw(JsonConvert.SerializeObject(EnumHelper.GetSelectList(typeof(EnumSurvayTargetSettings))));
+
+        var pageHandler = {
+
+            intialize: function () {
+
+                $("#settingGrid").ejGrid({
+                    dataSource: targets,
+                    editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
+                    toolbarSettings: {
+                        showToolbar: true,
+                        toolbarItems: [
+                            ej.Grid.ToolBarItems.Add, ej.Grid.ToolBarItems.Edit, ej.Grid.ToolBarItems.Delete,
+                            ej.Grid.ToolBarItems.Update, ej.Grid.ToolBarItems.Cancel
+                        ]
+                    },
+                    dataBound: pageHandler.onDataBound,
+                    actionComplete: pageHandler.gridActionComplete,
+                    endEdit: pageHandler.gridRecordAddOrUpdate,
+                    endAdd: pageHandler.gridRecordAddOrUpdate,
+                    isResponsive: true,
+                    columns: [
+                        { field: "Id", isPrimaryKey: true, visible: false },
+                        { field: "ProvinceId", headerText: 'Province/State', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "Id", foreignKeyValue: "Name", dataSource: provinces, validationRules: { required: true } },
+                        { field: "DistrictId", headerText: 'Distric/City', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "Id", foreignKeyValue: "Name", dataSource: districs, validationRules: { required: true } },
+                        { field: "OptionId", headerText: 'Options', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "Value", foreignKeyValue: "Text", dataSource: options, validationRules: { required: true } },
+                        { field: "Target", headerText: 'Target', editType: ej.Grid.EditingType.Numeric },
+                        { field: "CreatedBy", visible: false },
+                        { field: "CreatedDate", visible: false },
+                        { field: "IsActive", visible: false }
+                    ]
+                });
+                $.each(allSupervisors, function(i, data) {
+                    $('#' + data.Id).ejCheckBox({ value: data.Id, cssClass: 'gradient-lime' });
+                });
+                $.each(assignedSupervisors, function(i, data) {
+                    $('#' + data.Id).ejCheckBox({checked: true });
+                });
+
+
+            },
+            onDataBound : function(sender) {
+                var targetsSaved = sender.model.dataSource;
+                var total = 0;
+                $.each(targetsSaved, function(i, data) {
+                    total += data.Target;
+                });
+
+                $("#sumOfTarget").html(total);
+            },
+            gridActionComplete: function (sender) {
+
+                if (sender.requestType === "beginedit" || sender.requestType === "add") {
+                    var gridId = this._id;
+                    var provinceDropdownObj = $("#" + gridId + "ProvinceId").ejDropDownList('instance'); /* Get the object of ProvinceId column ejDropDownList */
+                    provinceDropdownObj.option({ enableFilterSearch: true, change: function (data) { pageHandler.provinceChange(gridId ,data)}});
+                }
+
+                if (sender.type === "actionComplete" && (sender.requestType === "save" || sender.requestType === "update" || sender.requestType === "delete")) {
+
+                    var targets = $("#settingGrid").ejGrid('instance').model.dataSource;
+
+                    var total = 0;
+                    $.each(targets, function(i, data) {
+                        total += data.Target;
+                    });
+                    var allTargets = $("#allTotal").val();
+                    if (allTargets < total) {
+                        notification("Error", "Allocated targets has been exceeded", "error");
+                    }
+                    $("#sumOfTarget").html(total);
+                }
+            },
+
+            gridRecordAddOrUpdate: function (sender) {
+
+                var targetsSaved = sender.model.dataSource;
+                var currentTarget = sender.data;
+
+                var duplicatedTargets  = $.grep(targetsSaved, function (p) {
+                    return currentTarget.ProvinceId === p.ProvinceId && currentTarget.DistrictId === p.DistrictId && p.Option === currentTarget.Option;
+                });
+                if (duplicatedTargets && duplicatedTargets.length > 1) {
+                    notification("Error", "This target has been already created", "error");
+                    $("#settingGrid").ejGrid("startEdit", $("#settingGrid .e-gridcontent tr").first());
+                    return;
+                }
+            },
+
+            provinceChange: function (gridId, data) {
+                var provinceId = +data.value;
+                debugger;
+                var url = '@Url.Action("GetDistricsByProvinceId", "SurvaySetting")'; 
+                url = url + "?provinceId=" + provinceId;
+
+                $.ajax({
+                    url: url ,
+                    method: 'GET',
+                    dataType: "json",
+                    success: function(respond) {
+                        if (respond.length > 0) {
+                            var districDropdownObj = $("#" + gridId + "DistrictId").ejDropDownList('instance'); /* Get the object of ProvinceId column ejDropDownList */
+                            districDropdownObj.option({ enableFilterSearch: true, dataSource: respond, fields: { text: "Name", value: "Id" }  });
+                        }
+                    },
+                    error: function(e) {
+
+                    }
+                });
+
+            }
+        };
+
+        (function () {
+            pageHandler.intialize();
+        })();
+
+    </script>

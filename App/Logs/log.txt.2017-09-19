@@ -1,0 +1,233 @@
+2017-09-19 00:01:15,726 [5] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:02:35,444 [5] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:05:29,141 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:05:42,385 [8] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(SurvayTypeDto survayType) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 127
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 76
+2017-09-19 00:05:42,425 [8] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 87
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 559
+2017-09-19 00:06:39,619 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:06:39,636 [8] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(SurvayTypeDto survayType) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 127
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 76
+2017-09-19 00:06:39,652 [8] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 87
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 559
+2017-09-19 00:08:17,133 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:08:22,206 [8] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(SurvayTypeDto survayType)
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+2017-09-19 00:08:22,218 [8] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 559
+2017-09-19 00:08:54,052 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:08:54,070 [8] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(SurvayTypeDto survayType)
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+2017-09-19 00:08:54,083 [8] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 559
+2017-09-19 00:12:22,592 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:15:25,808 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:27:00,303 [28] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:28:13,859 [28] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:29:37,283 [34] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 00:33:22,647 [34] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 20:57:14,801 [5] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 20:57:14,851 [5] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SurvayArm.Application.Service.AnswerSurvayService.<>c.<GetCheckWithTextQuestionAnswerValue>b__20_3(String[] c) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 467
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector)
+   at SurvayArm.Application.Service.AnswerSurvayService.GetCheckWithTextQuestionAnswerValue(List`1 allQuestions, Int32 questionId, AnswerFieldDto questionAnswer, List`1 answerRow) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 466
+2017-09-19 21:00:01,667 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 21:00:01,712 [8] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SurvayArm.Application.Service.AnswerSurvayService.<>c.<GetCheckWithTextQuestionAnswerValue>b__20_3(String[] c) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 467
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector)
+   at SurvayArm.Application.Service.AnswerSurvayService.GetCheckWithTextQuestionAnswerValue(List`1 allQuestions, Int32 questionId, AnswerFieldDto questionAnswer, List`1 answerRow) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 466
+2017-09-19 21:02:30,708 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 21:02:30,727 [7] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SurvayArm.Application.Service.AnswerSurvayService.<>c.<GetCheckWithTextQuestionAnswerValue>b__20_3(String[] c)
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector)
+   at SurvayArm.Application.Service.AnswerSurvayService.GetCheckWithTextQuestionAnswerValue(List`1 allQuestions, Int32 questionId, AnswerFieldDto questionAnswer, List`1 answerRow)
+2017-09-19 21:02:39,345 [7] ERROR SurvayArm.Application.Service.AnswerSurvayService - System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at SurvayArm.Application.Service.AnswerSurvayService.GetRadioQuestionAnswerValue(List`1 allQuestions, Int32 questionId, AnswerFieldDto questionAnswer, List`1 answerRow)
+2017-09-19 21:02:39,347 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 21:02:39,361 [7] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SurvayArm.Application.Service.AnswerSurvayService.<>c.<GetCheckWithTextQuestionAnswerValue>b__20_3(String[] c)
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector, IEqualityComparer`1 comparer)
+   at System.Linq.Enumerable.ToDictionary[TSource,TKey,TElement](IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector)
+   at SurvayArm.Application.Service.AnswerSurvayService.GetCheckWithTextQuestionAnswerValue(List`1 allQuestions, Int32 questionId, AnswerFieldDto questionAnswer, List`1 answerRow)
+2017-09-19 21:09:35,765 [5] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Answer question Id : 1049 is not found in field list with  checkbox button option type
+2017-09-19 21:43:09,583 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:09,592 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:09,592 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:09,592 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:09,592 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:09,592 [8] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:09,628 [8] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(Int32 survayTypeId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 111
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 74
+2017-09-19 21:43:09,643 [8] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 83
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 583
+2017-09-19 21:43:15,125 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:15,125 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:15,125 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:15,125 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:15,125 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:15,125 [10] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:43:15,138 [10] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(Int32 survayTypeId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 111
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 74
+2017-09-19 21:43:15,148 [10] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 83
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 583
+2017-09-19 21:46:02,923 [19] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:46:02,923 [19] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:46:02,923 [19] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:46:02,923 [19] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:46:02,923 [19] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:46:02,923 [19] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:46:14,795 [19] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(Int32 survayTypeId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 111
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 74
+2017-09-19 21:46:14,839 [19] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 83
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 583
+2017-09-19 21:47:03,067 [24] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:03,067 [24] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:03,067 [24] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:03,067 [24] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:03,067 [24] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:03,067 [24] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:08,772 [24] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(Int32 survayTypeId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 111
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 74
+2017-09-19 21:47:08,795 [24] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 83
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 583
+2017-09-19 21:47:19,765 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:19,765 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:19,765 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:19,765 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:19,765 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:47:19,765 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:01,681 [27] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.ArgumentException: Input array is longer than the number of columns in this table.
+   at System.Data.DataTable.NewRecordFromArray(Object[] value)
+   at System.Data.DataRowCollection.Add(Object[] values)
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(Int32 survayTypeId)
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+2017-09-19 21:49:01,708 [27] ERROR App.Controllers.SurvayController - Error :  System.Exception: Input array is longer than the number of columns in this table.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 583
+2017-09-19 21:49:21,842 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:21,842 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:21,842 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:21,842 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:21,842 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:21,842 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:49:29,221 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:31,186 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:50:31,186 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:50:31,186 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:50:31,186 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:50:31,186 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:50:31,186 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:50:38,344 [21] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,455 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:42,455 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:42,455 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:42,455 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:42,456 [27] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:51:57,123 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,919 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:53:52,920 [32] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,551 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 3, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.
+2017-09-19 21:58:07,564 [7] INFO  SurvayArm.Application.Service.AnswerSurvayService - Info : Question Id : SurvayArm.Application.Dto.FieldDto is not found in answer list , survay Id : 4, It might be an optional question.

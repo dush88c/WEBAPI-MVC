@@ -1,0 +1,25 @@
+2017-09-18 21:28:33,875 [5] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.EvaluateParameter(Object[] arguments)
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at SurvayArm.Application.Service.AnswerSurvayService.GetAnswersBySurvayId(Int32 survayId)
+2017-09-18 21:28:33,913 [5] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.AnswerSurvayService.GetAnswersBySurvayId(Int32 survayId)
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+2017-09-18 21:28:33,924 [5] ERROR App.Controllers.SurvayController - Error :  System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId)
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 559
+2017-09-18 23:29:37,707 [5] ERROR SurvayArm.Application.Service.AnswerSurvayService - Error :  System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.AnswerSurvayService.InsertAnswersIntoDataTable(SurvayTypeDto survayType) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 124
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 76
+2017-09-18 23:29:37,733 [5] ERROR App.Controllers.SurvayController - Error :  System.Exception: Object reference not set to an instance of an object.
+   at SurvayArm.Application.Service.AnswerSurvayService.ExportToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.Application\Service\AnswerSurvayService.cs:line 87
+   at App.Controllers.SurvayController.ExportAnswerToCsv(Int32 survayId) in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\App\Controllers\SurvayController.cs:line 559

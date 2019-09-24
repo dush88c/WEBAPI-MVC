@@ -1,0 +1,80 @@
+﻿@using (Html.BeginForm("Create", "UserManagement", FormMethod.Post, new { id = "userForm" }))
+{
+   <div class="row">
+        <div class="col-sm-4 form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control input-sm requiredField" placeholder="First Name" id="firstName">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control input-sm requiredField" placeholder="Last Name" id="lastName">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Email</label>
+            <input type="email" class="form-control input-sm requiredField" placeholder="E-mail" id="email">
+        </div>
+    </div>
+
+    <div class="row border-head">
+        <div class="col-sm-4 form-group">
+            <label>Address Line - 01</label>
+            <input type="text" class="form-control input-sm requiredField" placeholder="Address Line 01" id="addressLine01">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Address Line - 02</label>
+            <input type="text" class="form-control input-sm" placeholder="Address Line 02" id="addressLine02">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>City</label>
+            <input type="text" class="form-control input-sm requiredField" placeholder="City" id="city">
+        </div>
+    </div>
+    <div class="row border-head">
+        <div class="col-sm-4 form-group">
+            <label>Mobile Number</label>
+            <input type="text" class="form-control input-sm requiredField" placeholder="Mobile Number" id="mobileNo">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Home Phone Number</label>
+            <input type="text" class="form-control input-sm" placeholder="Home Number" id="phoneNo">
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Birth of Date</label>
+            <input type="text" class="form-control input-sm requiredField" id="birthOfDate">
+        </div>
+    </div>
+    <div class="row border-head">
+        <div class="col-sm-6 form-group">
+            <label>Password</label>
+            <input type="password" class="form-control input-sm requiredField" placeholder="Password" id="password">
+        </div>
+        <div class="col-sm-6 form-group">
+            <label>Re-type Password</label>
+            <input type="password" class="form-control input-sm requiredField" placeholder="Re-type Password" id="reTryPassword">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+            <button class="btn btn-danger btn-primary" id="modal-cancel" type="button"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    function intializeUserAddView() {
+        $("#birthOfDate").ejDatePicker({ value: new Date("1980/08/08") });
+       
+        $("#userForm").submit(function (event) {
+
+            event.preventDefault();
+            gridActionEvent.onClickSaveBtn($(this));
+        });
+
+        $("#modal-cancel").on('click', function() {
+            userAddModal.close();
+        });
+
+    }
+</script>

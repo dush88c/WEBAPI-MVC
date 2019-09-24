@@ -1,0 +1,4 @@
+2017-09-27 00:18:42,431 [8] ERROR SurvayArm.API.Controllers.SurvayController - Error : System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.API.Controllers.SurvayController.<SaveFilesInDirectory>d__14.MoveNext() in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.API\Controllers\SurvayController.cs:line 289
+2017-09-27 00:19:37,221 [8] ERROR SurvayArm.API.Controllers.SurvayController - Error : System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurvayArm.API.Controllers.SurvayController.<SaveFilesInDirectory>d__14.MoveNext() in D:\dush88c\Project\Survay\SurvayArm\SurvayArm\SurvayArm.API\Controllers\SurvayController.cs:line 289

@@ -1,0 +1,120 @@
+﻿@using SurvayArm.Utility
+@model  List<App.Models.AppModel.SurvayTypeViewModel>
+    
+<div class="row">
+    <div class="form-group col-md-12 ">
+        @foreach (var survay in Model)
+        {
+            if (survay.LanguageType == (int)EnumLanguageType.Shinhala)
+            {
+                <a class="btn btn-blue" value ="@survay.Id">සිංහල</a>
+            }
+            else if ((survay.LanguageType == (int)EnumLanguageType.English))
+            {
+                <a class="btn btn-orange" value ="@survay.Id">ENGLISH</a>
+            }
+            else
+            {
+                <a class="btn btn-green"  value ="@survay.Id">தமிழ்</a>
+            }
+
+        }
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    (function() {
+        $(".btn").on('click',
+            function (e) {
+                onClickBtn(e);
+            });
+    })();
+
+    function onClickBtn(e) {
+        var survayId = +$(e.target).attr('value');
+        $.ajax({
+            url: "@Url.Action("GetFieldDependantBySurvayCode", "Survay")",
+            method: "GET",
+            data: { survayId: survayId }
+        }).done(function(response) {
+            if (response) {
+               $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: "Set question'" + "s dependant questions",
+                    content: response,
+                    columnClass: "xl",
+                    draggable: true,
+                    type: 'blue',
+                    animationSpeed: 1000,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function() {
+                                var dependants = $("#fieldDependantGrid").ejGrid('instance').model.dataSource;
+                                var fieldDependants = [];
+                                if (dependants) {
+                                    dependants.forEach(function(item, index) {
+                                        var id = item.Id;
+                                        if (id > 0) {
+                                            fieldDependants.push({
+                                                Id: +item.Id,
+                                                FieldId: +item.FieldId,
+                                                DependantFieldId: +item.DependantFieldId,
+                                                DependantType: +item.DependantType,
+                                                Value : item.Value,
+                                                CreatedBy: item.CreatedBy,
+                                                CreatedDate: item.CreatedDate,
+                                                IsActive: true
+
+                                            });
+                                        } else {
+                                            fieldDependants.push({
+                                                Id: +item.Id,
+                                                FieldId: +item.FieldId,
+                                                DependantType: +item.DependantType,
+                                                DependantFieldId: +item.DependantFieldId,
+                                                Value: item.Value,
+                                                IsActive: true
+                                            });
+                                        }
+                                    });
+                                }
+                                $.ajax({
+                                    url: "@Url.Action("SaveDependantField", "Survay")",
+                                    dataType: "json",
+                                    method: "POST",
+                                    data: { model: JSON.stringify(fieldDependants), survayId: survayId }
+                                }).done(function(response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly Inserted", "success");
+                                    } else {
+                                        notification("Error", "Error in inserting", "error");
+                                        return false;
+                                    }
+                                    survayTypesModal.close();
+                                    return true;
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function() {
+                                
+                            }
+                        }
+                    }
+                });
+            } else {
+                notification("Error", "Error occured , pleas try again", "error");
+            }
+
+
+        });
+    }
+</script>
+

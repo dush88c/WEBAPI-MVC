@@ -1,0 +1,390 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using Syncfusion.JavaScript.Models
+<div class="right_col" role="main">
+
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>User Role Management</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-4">
+                    <div class="box no-border">                        
+                        <div class="box-header with-border">
+                             <span><strong>Admin</strong></span>
+                        </div>
+                        <div class="box-body">
+                          @(Html.EJ().Grid<IdentityUserRole>("UserRoleGrid_Admin")
+                          .Datasource(ds => ds.URL(@Url.Action("GetAllUserRoleForGrid", "UserRole",new { roleName = "Admin" })).Adaptor(AdaptorType.UrlAdaptor))
+                          .AllowPaging()
+                          .AllowSorting()
+                          .IsResponsive(true)
+                          .MinWidth(100)
+                          .ToolbarSettings(toolbar =>
+                          {
+                              toolbar.ShowToolbar().CustomToolbarItems(new List<object>
+                                  {
+                                      new CustomToolbarItem {TemplateID = "#AddTemplate", Text = "Add"},
+                                      new CustomToolbarItem {TemplateID = "#DeleteTemplate", Text = "Delete"},
+                                      new CustomToolbarItem {TemplateID = "#refreshTemplate", Text = "Refresh"},
+                                      
+                                  });
+                          })
+                          .EditSettings(edit => { edit.AllowEditOnDblClick(false); })
+                          .ClientSideEvents(evt =>
+                          {
+                              evt.ActionFailure("toolbarClickEvent.failureMessage");
+                              evt.ToolbarClick("toolbarClickEvent.onClickAdminTableToolbar");
+                              evt.ActionBegin("gridActionEvent.onBegin");
+                              evt.ActionComplete("gridActionEvent.onComplete");
+                          })
+                          .Columns(col =>
+                          {
+                              col.Field(p => p.RoleId).IsPrimaryKey(true).Visible(false).Add();
+                              col.Field(p => p.UserId).HeaderText("Name").DataSource(Url.Action("GetAllUser", "UserManagement")).ForeignKeyField("Id").ForeignKeyValue("FullName").TextAlign(TextAlign.Left).Add();
+                          }))
+                        </div>
+                        <div class="overlay">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box no-border">
+                        <div class="box-header with-border">
+                            <span><strong>Supervisor</strong></span>
+                        </div>
+                        <div class="box-body">
+                          @(Html.EJ().Grid<IdentityUserRole>("UserRoleGrid_Supervisor")
+                          .Datasource(ds => ds.URL(@Url.Action("GetAllUserRoleForGrid", "UserRole", new { roleName = "Supervisor" })).Adaptor(AdaptorType.UrlAdaptor))
+                          .AllowPaging()
+                          .AllowSorting(false)
+                          .IsResponsive(true)
+                          .MinWidth(100)
+                          .ToolbarSettings(toolbar =>
+                          {
+                              toolbar.ShowToolbar().CustomToolbarItems(new List<object>
+                                  {
+                                      new CustomToolbarItem {TemplateID = "#AddTemplate", Text = "Add"},
+                                      new CustomToolbarItem {TemplateID = "#DeleteTemplate", Text = "Delete"},
+                                      new CustomToolbarItem {TemplateID = "#refreshTemplate", Text = "Refresh"}
+
+                                  });
+                          })
+                          .EditSettings(edit => { edit.AllowEditOnDblClick(false); })
+                          .ClientSideEvents(evt =>
+                          {
+                              evt.ActionFailure("toolbarClickEvent.failureMessage");
+                              evt.ToolbarClick("toolbarClickEvent.onClickSupervisorTableToolbar");
+                              evt.ActionBegin("gridActionEvent.onBegin");
+                              evt.ActionComplete("gridActionEvent.onComplete");
+                          })
+                          .Columns(col =>
+                          {
+                              col.Field(p => p.RoleId).IsPrimaryKey(true).Visible(false).Add();
+                              col.Field(p => p.UserId).HeaderText("Name").DataSource(Url.Action("GetAllUser", "UserManagement")).ForeignKeyField("Id").ForeignKeyValue("FullName").TextAlign(TextAlign.Left).Add();
+                          }))
+                        </div>
+                        <div class="overlay">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box no-border col-md-6">
+                        <div class="box-header with-border">
+                            <span><strong>Data Collector</strong></span>
+                        </div>
+                        <div class="box-body">
+                           @(Html.EJ().Grid<IdentityUserRole>("UserRoleGrid_DataCollector")
+                          .Datasource(ds => ds.URL(@Url.Action("GetAllUserRoleForGrid", "UserRole", new { roleName = "DataCollector" })).Adaptor(AdaptorType.UrlAdaptor))
+                          .AllowPaging()
+                          .AllowSorting()
+                          .IsResponsive(true)
+                          .MinWidth(100)
+                          .ToolbarSettings(toolbar =>
+                          {
+                              toolbar.ShowToolbar().CustomToolbarItems(new List<object>
+                                  {
+                                      new CustomToolbarItem {TemplateID = "#AddTemplate", Text = "Add"},
+                                      new CustomToolbarItem {TemplateID = "#DeleteTemplate", Text = "Delete"},
+                                      new CustomToolbarItem {TemplateID = "#refreshTemplate", Text = "Refresh"}
+                                  });
+                          })
+                          .EditSettings(edit => { edit.AllowEditOnDblClick(false); })
+                          .ClientSideEvents(evt =>
+                          {
+                              evt.ActionFailure("toolbarClickEvent.failureMessage");
+                              evt.ToolbarClick("toolbarClickEvent.onClickDataCollectorTableToolbar");
+                              evt.ActionBegin("gridActionEvent.onBegin");
+                              evt.ActionComplete("gridActionEvent.onComplete");
+                          })
+                          .Columns(col =>
+                          {
+                              col.Field(p => p.RoleId).IsPrimaryKey(true).Visible(false).Add();
+                              col.Field(p => p.UserId).HeaderText("Name").ForeignKeyField("Id").ForeignKeyValue("FullName").DataSource(Url.Action("GetAllUser", "UserManagement")).TextAlign(TextAlign.Left).Add();
+
+                          }))
+                        </div>
+                        <div class="overlay">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+</div>
+
+<script type="text/x-jsrender" id="AddTemplate">
+    <span id="addSri" title="Add New User"><a class="e-toolbaricons e-icon"><i class="fa fa-plus white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="refreshTemplate">
+    <span id="refresh" title="Refresh"><a class="e-toolbaricons e-icon"><i class="fa fa-refresh white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="DeleteTemplate">
+    <span id="deleteTemplate" title="Delete"><a class="e-toolbaricons e-icon"><i class="fa fa-trash-o white-bg"></i></a></span>
+</script>
+@section Scripts{
+    <script type="text/javascript">
+        var allRoles = @Html.Raw(Json.Encode(ViewBag.Roles));
+
+        var loadingGrid = $("div.box").find(".overlay");
+        var effectGrid;
+        var gridActionEvent = {
+            onComplete: function () {
+                $(loadingGrid).addClass('hidden');
+            },
+            onBegin: function () {
+                $(loadingGrid).removeClass('hidden');
+            },
+            failureMessage: function (args) {
+                $(loadingGrid).removeClass('hidden');
+                notification("Error", "Error occured", "error");
+            }
+        }
+        var toolbarClickEvent = {
+
+            onClickAdminTableToolbar: function (sender) {
+
+                var targetId = sender.itemName;
+                var gridObj = $("#UserRoleGrid_Admin").ejGrid("instance");
+                var selectedRow;
+                effectGrid = "UserRoleGrid_Admin";
+                if (targetId === "AddTemplate") {
+                    commonGridEvent.onGridAdd("Admin");
+
+                } else if (targetId === "refreshTemplate") {
+                    gridObj.refreshContent();
+                } else if (targetId === "DeleteTemplate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        commonGridEvent.onClickDeleteBtn(selectedRow,"Admin");
+                    }
+                    gridObj.refreshContent();
+                }
+            },
+            onClickSupervisorTableToolbar: function (sender) {
+                var targetId = sender.itemName;
+                var gridObj = $("#UserRoleGrid_Supervisor").ejGrid("instance");
+                var selectedRow;
+                effectGrid = "UserRoleGrid_Supervisor";
+                if (targetId === "AddTemplate") {
+
+                    commonGridEvent.onGridAdd("Supervisor");
+
+                } else if (targetId === "refreshTemplate") {
+                    gridObj.refreshContent();
+                } else if (targetId === "DeleteTemplate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        commonGridEvent.onClickDeleteBtn(selectedRow,"Supervisor");
+                    }
+                    gridObj.refreshContent();
+                }
+            },
+            onClickDataCollectorTableToolbar: function (sender) {
+
+                var targetId = sender.itemName;
+                var gridObj = $("#UserRoleGrid_DataCollector").ejGrid("instance");
+                var selectedRow;
+                effectGrid = "UserRoleGrid_DataCollector";
+                if (targetId === "AddTemplate") {
+                    commonGridEvent.onGridAdd("DataCollector");
+
+                } else if (targetId === "refreshTemplate") {
+                    gridObj.refreshContent();
+                } else if (targetId === "DeleteTemplate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        commonGridEvent.onClickDeleteBtn(selectedRow,"DataCollector");
+                    }
+                    gridObj.refreshContent();
+                }
+            }
+        }
+
+        var commonGridEvent = {
+
+            onGridAdd: function (role) {
+                $(loadingGrid).removeClass('hidden');
+                $.ajax({
+                    url: "@Url.Action("GetLoaddedAddView", "UserRole")",
+                    //dataType: "json",
+                    method: "GET"
+
+                }).done(function(response) {
+
+                    userRoleAddModal = $.dialog({
+                            title: "Adding user to "+ role + " role",
+                            type: 'blue',
+                            columnClass: "s",
+                            content: response,
+                            draggable: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1000,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            onOpen: function() {
+                                $(loadingGrid).addClass('hidden');                              
+                            }
+                        }
+                    );
+                }, function() {
+                    $(loadingGrid).addClass('hidden');
+                });
+            },
+            onClickDeleteBtn: function (row ,role) {
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].UserId;
+
+                $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    content: 'Are You sure to remove the user from role ?',
+                    closeIcon: true,
+                    draggable: true,
+                    closeIconClass: 'fa fa-close',
+                    animationSpeed: 1000,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                $.ajax({
+                                    url: "@Url.Action("DeleteUserRole", "UserRole")",
+                                    dataType: "json",
+                                    method: "DELETE",
+                                    data: { userId: id, role: role }
+                                }).done(function (response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly deleted", "success");
+                                    } else {
+                                        notification("Error", response.message, "error");
+                                    }
+
+                                    var gridObj = $("#" + effectGrid).ejGrid("instance");
+                                    gridObj.refreshContent();
+                                    $(loadingGrid).addClass('hidden');
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $(loadingGrid).addClass('hidden');
+                            }
+                        }
+                    }
+                });
+                $(loadingGrid).addClass('hidden');
+            },
+            onClickSaveBtn: function (formData) {
+                var role;
+                if (effectGrid === "UserRoleGrid_Admin") {
+                    role = $.grep(allRoles, function (r) {
+                        return r.Name === "Admin";
+                    });
+
+                } else if (effectGrid === "UserRoleGrid_Supervisor") {
+                    role = $.grep(allRoles, function (r) {
+                        return r.Name === "Supervisor";
+                    });
+                } else {
+                    role = $.grep(allRoles, function (r) {
+                        return r.Name === "DataCollector";
+                    });
+                }
+
+                var userId = $("#user").data("ejDropDownList").getSelectedValue();
+
+                var userRoleDataModel = $("#" + effectGrid).data("ejGrid").model.currentViewData;
+               
+                var userRoles = $.grep(userRoleDataModel, function (p) {
+                    return p.RoleId === role[0].Id && p.UserId === userId;
+                });
+                if (userRoles && userRoles.length > 0) {
+                    if (userRoleDataModel.length > 0 && userRoles.length <= 1) {
+                        notification("Error", "User already assigned", "error");
+                        return;
+                    }
+                    this.sendSaveAjax(userId);
+                    
+                } else {
+                    this.sendSaveAjax(userId);
+                }
+            },
+
+            sendSaveAjax: function (userId) {
+                var role;
+                if (effectGrid === "UserRoleGrid_Admin") {
+                    role = "Admin";
+                } else if (effectGrid === "UserRoleGrid_Supervisor") {
+                    role = "Supervisor";
+                } else {
+                    role = "DataCollector";
+                }
+                var model = {
+                    RoleId: role,
+                    UserId: userId
+                }
+                $.ajax({
+                    url: "@Url.Action("AssignUserRole", "UserRole")",
+                    dataType: "json",
+                    method: "POST",
+                    data: { model: JSON.stringify(model) }
+                }).done(function(response) {
+
+                    if (response.status) {
+                        userRoleAddModal.close();
+                        notification("Success", "Successfuly Saved", "success");
+                        var gridObj = $("#" + effectGrid).data("ejGrid");
+                        gridObj.refreshContent();
+                    } else {
+                        notification("Error", response.message, "error");
+                    }
+                });
+            }
+
+        }
+</script>
+    }

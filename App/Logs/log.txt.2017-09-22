@@ -1,0 +1,2 @@
+2017-09-22 19:16:09,477 [37] ERROR SurvayArm.Application.Service.SurvayService - Error : Survay is not existing in DB , survay details :  1006 SortSample001
+2017-09-22 19:16:09,490 [37] ERROR SurvayArm.Application.Service.SurvayService - Error : Survay is not existing in DB , survay details :  2006 SortSample001

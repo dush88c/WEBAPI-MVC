@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvayArm.App", "App\SurvayArm.App.csproj", "{FDF7C948-CB07-4DAC-8737-B96B01ABC40E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvayArm.Application", "SurvayArm.Application\SurvayArm.Application.csproj", "{87857264-B207-4CBC-86F0-C48BA9DCB4C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvayArm.Utility", "SurvayArm.Utility\SurvayArm.Utility.csproj", "{93BD3A0A-9C9A-41E5-B557-069C54688C2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvayArm.Data", "SurvayArm.Data\SurvayArm.Data.csproj", "{36FBE35B-C045-4A6D-BE6F-CF257F825B1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APPs", "APPs", "{19BD3EE5-C411-4E34-8FA2-5203B324EC76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvayArm.API", "SurvayArm.API\SurvayArm.API.csproj", "{AF535E2F-5ECF-4F94-AFB9-63AAEF5530A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDF7C948-CB07-4DAC-8737-B96B01ABC40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDF7C948-CB07-4DAC-8737-B96B01ABC40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDF7C948-CB07-4DAC-8737-B96B01ABC40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDF7C948-CB07-4DAC-8737-B96B01ABC40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87857264-B207-4CBC-86F0-C48BA9DCB4C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87857264-B207-4CBC-86F0-C48BA9DCB4C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87857264-B207-4CBC-86F0-C48BA9DCB4C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87857264-B207-4CBC-86F0-C48BA9DCB4C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93BD3A0A-9C9A-41E5-B557-069C54688C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93BD3A0A-9C9A-41E5-B557-069C54688C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93BD3A0A-9C9A-41E5-B557-069C54688C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93BD3A0A-9C9A-41E5-B557-069C54688C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36FBE35B-C045-4A6D-BE6F-CF257F825B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36FBE35B-C045-4A6D-BE6F-CF257F825B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36FBE35B-C045-4A6D-BE6F-CF257F825B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36FBE35B-C045-4A6D-BE6F-CF257F825B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF535E2F-5ECF-4F94-AFB9-63AAEF5530A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF535E2F-5ECF-4F94-AFB9-63AAEF5530A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF535E2F-5ECF-4F94-AFB9-63AAEF5530A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF535E2F-5ECF-4F94-AFB9-63AAEF5530A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FDF7C948-CB07-4DAC-8737-B96B01ABC40E} = {19BD3EE5-C411-4E34-8FA2-5203B324EC76}
+		{AF535E2F-5ECF-4F94-AFB9-63AAEF5530A9} = {19BD3EE5-C411-4E34-8FA2-5203B324EC76}
+	EndGlobalSection
+EndGlobal

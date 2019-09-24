@@ -1,0 +1,118 @@
+﻿@model App.Models.AppModel.SurvayTypeViewModel
+
+@{
+    ViewBag.Title = "Update survay";
+    Layout = "~/Views/Shared/_SurvayLayout.cshtml";
+}
+<link href="~/Content/WebTheme/Survay/formBuilder.css" rel="stylesheet" />
+<div>
+    <!-- AddThis Button BEGIN -->
+    <!-- AddThis Button END -->
+</div>
+<div class="row">
+    <div class='fb-main col-md-8'></div>
+    @*<div class="code col-md-4"></div>*@
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        var language = @Model.LanguageType;
+        var survayId = @Model.Survay.Id;
+        var survayTypeId = @Model.Id;
+        var fields = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.fields, new Newtonsoft.Json.JsonSerializerSettings() { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore }));
+        var description = "@Html.Raw(Model.Description.Replace("\n" , "&#13;&#10;"));"
+        $(function() {
+
+            var fb = new Formbuilder({
+                selector: '.fb-main',
+                bootstrapData: fields
+            });
+
+            fb.on('save',
+                function (payload) {
+                    debugger;
+                    var content = '' +
+                        '<div class="">' +
+                        '<div class="form-group">' +
+                        '<label>Survay Name</label>' +
+                        '<input type="text" placeholder="Survay name" value = "@Model.Survay.Name" class="name form-control" disabled required />' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label>Description</label>' +
+                        '<textarea placeholder="Description" class="description" required >' + description + '</textarea>' +
+                        '</div>' +
+                        '<div class="form-group"><div class="form-group">' +
+                        '<label>Is Active</label>' +
+                        '<div class="checkbox checkbox-success checkbox-circle">' +
+                        '<input id="isActive" class="styled" type="checkbox" checked><label for="isActive"></label>' +
+                        '</div></div>' +
+                        '</div>';
+
+                    $.confirm({
+                        icon: 'fa fa-spinner fa-spin',
+                        title: 'Confirm!',
+                        columnClass: 's',
+                        content: content,
+                        animationSpeed: 1000,
+                        animation: 'top',
+                        closeAnimation: 'bottom',
+                        buttons: {
+                            save:
+                            {
+                                btnClass: 'btn-blue',
+                                action: function() {
+                                    var desc = $(".description").val();
+                                    var name = $(".name").val();
+                                    var isActive = $("#isActive")[0].checked;
+                                    if (!name) {
+                                        notification("Error", "Please give the name", "error");
+                                        return false;
+                                    }
+                                    if (!desc) {
+                                        notification("Error", "Please give the description", "error");
+                                        return false;
+                                    }
+
+                                    $.ajax({
+                                        url: "@Url.Action("UpdateSurvay", "Survay")",
+                                        dataType: "json",
+                                        method: "POST",
+                                        data: {
+                                            model: payload,
+                                            name: name,
+                                            description: desc,
+                                            survayId: survayId,
+                                            id: survayTypeId,
+                                            isActive: isActive
+                                        }
+                                    }).done(function(response) {
+                                        if (response.status) {
+                                            notification("Success", "Successfuly updated", "success");
+                                        } else {
+                                            notification("Error", "Error in updating", "error");
+                                        }
+                                        setTimeout(function() {
+                                            location.href = '@Url.Action("Index", "Survay")';
+                                            },
+                                            1000);
+
+
+                                    });
+                                }
+                            },
+                            cancel: {
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    return true;
+                                }
+                            }
+                        }
+                    });
+                });
+
+        });
+    </script>
+
+}

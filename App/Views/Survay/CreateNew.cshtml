@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Create a new survay";
+    Layout = "~/Views/Shared/_SurvayLayout.cshtml";
+}
+<link href="~/Content/WebTheme/Survay/formBuilder.css" rel="stylesheet" />
+<div>
+    <!-- AddThis Button BEGIN -->
+    
+   
+    <!-- AddThis Button END -->
+</div>
+<div class="row">
+    <div class='fb-main col-md-8'></div>
+    @*<div class="code col-md-4"></div>*@
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        var language = +@ViewBag.Language;
+
+        $(function() {           
+            var fb = new Formbuilder({
+                selector: '.fb-main',
+                bootstrapData: [
+                    {
+                        "label": "01. Please give your name",
+                        "field_type": "text",
+                        "orderNo" : 1,
+                        "required": true,
+                        "field_options": {"size": "small", "min_max_length_units": null, "minlength": 0, "min": 0, "max": 0 }
+                    }
+                ]
+            });
+
+            fb.on('save',
+                function(payload) {
+
+                    var jc = $.confirm({
+                        icon: 'fa fa-spinner fa-spin',
+                        title: 'Confirm!',
+                        columnClass: 's',
+                        animationSpeed: 1000,
+                        animation: 'top',
+                        closeAnimation: 'bottom',
+                        content: '' +
+                            '<div class="">' +
+                            '<div class="form-group">' +
+                            '<label>Survay Name</label>' +
+                            '<input type="text" placeholder="Survay name" class="name form-control" required />' +
+                            '</div>' +
+                            '<div class="form-group">' +
+                            '<label>Description</label>' +
+                            '<textarea placeholder="Description" class="description" required />' +
+                            '</div>' +
+                            '</div>',
+                        buttons: {
+                            save:
+                            {
+                                btnClass: 'btn-blue',
+                                action: function() {
+                                    var desc = $(".description").val();
+                                    var name = $(".name").val();
+                                    if (!name) {
+                                        notification("Error", "Please give the name", "error");
+                                        return false;
+                                    }
+                                    if (!desc) {
+                                        notification("Error", "Please give the description", "error");
+                                        return false;
+                                    }
+
+                                    $.ajax({
+                                        url: "@Url.Action("SaveNewSurvay", "Survay")",
+                                        dataType: "json",
+                                        method: "POST",
+                                        data: { model: payload, name: name, description: desc, languageType: language }
+                                    }).done(function(response) {
+                                        if (response.status) {
+                                            notification("Success", "Successfuly inserted", "success");
+                                        } else {
+                                            notification("Error", "Error in inserting", "error");
+                                        }
+                                        setTimeout(function() {
+                                                location.href = '@Url.Action("Index", "Survay")'
+                                            },
+                                            1000);
+
+
+                                    });
+                                }
+                            },
+                            cancel: {
+                                btnClass: 'btn-red',
+                                action: function() {
+                                    return true;
+                                }
+                            }
+                        }
+                    });
+                });
+
+        });
+    </script>
+
+}
+
+

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<SelectListItem>
+
+
+<div class="row">
+    <div class="col-md-12 form-group">
+        <label>Survay</label>
+        <select id="survayDropDown"></select>
+
+    </div>
+    <div class="col-md-12 form-group" id="btn_loader">
+        <a class="btn btn-blue" id="btn_sinhala">සිංහල</a>
+        <a class="btn btn-orange" id="btn_english">ENGLISH</a>
+        <a class="btn btn-green" id="btn_tamil">தமிழ்</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var data = @Html.Raw(Json.Encode(Model));
+    data.unshift({ Text: "Select one", Value: 0 });
+
+    var pageEventsHandler = {
+        dropDownOnChange: function (e) {
+            
+            $("#btn_loader a").show();
+            var survayCode = +e.selectedValue;
+            if (survayCode) {
+                $.ajax({
+                    url: "@Url.Action("GetLanguageBasedSurvayById", "Survay")",
+                    method: "GET",
+                    data: { survayId: survayCode }
+                }).done(function (response) {
+                    if (response.isSinhala) {
+                        $("#btn_sinhala").hide();
+                    }
+                    if (response.isEnglish) {
+                        $("#btn_english").hide();
+                    }
+                    if (response.isTamil) {
+                        $("#btn_tamil").hide();
+                    }
+                    });
+            } else {
+                notification("Error", "Please select a survay created", "error");
+            }
+
+        },
+        onClickSinhala: function () {
+
+            var survayCode = +$('#survayDropDown').ejDropDownList('getSelectedValue');
+            if (survayCode) {
+                var url = '@Url.Action("CreateNew", "Survay", new { language = "1" })';
+                url = url + "&&survayId=" + survayCode;
+                window.open(url, '_blank');
+            } else {
+                notification("Error", "Please select a survay created", "error");
+            }
+
+        },
+        onClickEnglish: function () {
+
+            var survayCode = +$('#survayDropDown').ejDropDownList('getSelectedValue');
+            if (survayCode){
+            var url = '@Url.Action("CreateNew", "Survay", new { language = "2" })';
+            url = url + "&&survayId=" + survayCode;
+            window.open(url, '_blank');
+            }else {
+                notification("Error", "Please select a survay created", "error");
+            }
+
+        },
+        onClickTamil: function () {
+            var survayCode = +$('#survayDropDown').ejDropDownList('getSelectedValue');
+            if (survayCode){
+                var url = '@Url.Action("CreateNew", "Survay", new { language = "3" })';
+                url = url + "&&survayId=" + survayCode;
+                window.open(url, '_blank');
+            }else {
+                notification("Error", "Please select a survay created", "error");
+            }
+
+        }
+    };
+
+    (function () {
+        $("#survayDropDown").ejDropDownList({
+            width: '200px', dataSource: data, fields: { text: 'Text', value: 'Value' },
+            enableFilterSearch: true, waterMarkText: "Select",
+            change: pageEventsHandler.dropDownOnChange
+        });
+
+        $("#btn_sinhala").on("click", pageEventsHandler.onClickSinhala);
+        $("#btn_english").on("click", pageEventsHandler.onClickEnglish);
+        $("#btn_tamil").on("click", pageEventsHandler.onClickTamil);
+
+    })();
+
+
+
+</script>

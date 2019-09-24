@@ -1,0 +1,687 @@
+﻿@using App.Models.AppModel
+@using Syncfusion.JavaScript.Models
+<div class="right_col" role="main">
+
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Survay Management</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div> <br />
+        
+           <div class="row">
+                <div class="col-md-2">
+                    <a id="btn_create" class="btn btn-theme"><i class="fa fa-arrow-circle-o-right"> New survay</i></a>
+                </div>
+               <div class="col-md-2">   
+                   <a id="btn_create_lang" class="btn btn-green"><i class="fa fa-arrow-circle-o-right"> Language Type</i></a>
+               </div>
+            </div>
+        <div class="row">
+            <div class="box no-border">
+                <div class="box-header with-border">
+                </div>
+                <div class="box-body">
+                    @(Html.EJ().Grid<SurvayViewModel>("survayGrid")
+                          .Datasource(ds => ds.URL(@Url.Action("GetAllSurvayForGrid", "Survay")).Adaptor(AdaptorType.UrlAdaptor))
+                          .AllowPaging()
+                          .AllowSorting()
+                          .AllowFiltering()
+                          .IsResponsive(true)
+                          .MinWidth(600)
+                          .ToolbarSettings(toolbar =>
+                          {
+                              if (User.IsInRole("Admin"))
+                              {
+                                  toolbar.ShowToolbar().CustomToolbarItems(new List<object>
+                              {
+                                      new CustomToolbarItem {TemplateID = "#Edit", Text = "Update"},
+                                      new CustomToolbarItem {TemplateID = "#Dependant", Text = "Add Dependant"},
+                                      new CustomToolbarItem {TemplateID = "#Settings", Text = "Setting"},
+                                      new CustomToolbarItem {TemplateID = "#UsersAssigned", Text = "Users Assign"},
+                                      new CustomToolbarItem {TemplateID = "#Delete", Text = "Delete"},
+                                      new CustomToolbarItem {TemplateID = "#Activate", Text = "Activate"},
+                                      new CustomToolbarItem {TemplateID = "#refresh", Text = "Refresh"},
+                                      new CustomToolbarItem {TemplateID = "#csvExport", Text = "Csv Export"}
+
+                                  });
+                              }
+                          })
+                          .EditSettings(edit => { edit.AllowEditOnDblClick(false); })
+                          .ClientSideEvents(evt =>
+                          {
+                              evt.ActionFailure("gridActionEvent.failureMessage");
+                              evt.ToolbarClick("toolbarClickEvent.onClickToolbar");
+                              evt.ActionBegin("gridActionEvent.onBegin");
+                              evt.ActionComplete("gridActionEvent.onComplete");
+                          })
+                          .Columns(col =>
+                          {
+                              col.Field(p => p.Id).Visible(false).IsPrimaryKey(true).Add();
+                              col.Field(p => p.Name).HeaderText("Survay Name").TextAlign(TextAlign.Left).AllowSorting(true).AllowFiltering(true).Add();
+                              col.Field(p => p.NoOfQuestion).HeaderText("No of Question").TextAlign(TextAlign.Left).AllowFiltering(false).Add();
+                              col.Field(p => p.Id).HeaderText("Code").TextAlign(TextAlign.Left).AllowFiltering(true).Add();
+                              col.Field(p => p.UpdatedBy).HeaderText("Last Updated By").TextAlign(TextAlign.Left).AllowFiltering(true).AllowSorting(true).Add();
+                              col.Field(p => p.IsActive).HeaderText("Is Active").Template("#IsActiveTemplate").TextAlign(TextAlign.Left).AllowFiltering(false).Add();
+                          }))
+                </div>
+                <div class="overlay">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+
+      </div>
+               
+        
+    </div>
+
+<script type="text/x-jsrender" id="IsActiveTemplate"> 
+
+    {{if IsActive == true}}
+    <span class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></span>
+    {{else IsActive == false}}
+    <span class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></span>
+    {{/if}}
+</script>
+<script type="text/x-jsrender" id="Edit">
+    <span id="editJobCard"><a class="e-toolbaricons e-icon"><i class="fa fa-pencil white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Dependant">
+    <span id="refresh"><a class="e-toolbaricons e-icon"><i class="fa fa-random white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Delete">
+    <span id="deleteTemplate" ><a class="e-toolbaricons e-icon"><i class="fa fa-trash white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Activate">
+    <span id="activateTemplate"><a class="e-toolbaricons e-icon"><i class="fa fa-check-circle-o white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="refresh">
+    <span id="refresh"><a class="e-toolbaricons e-icon"><i class="fa fa-refresh white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="Settings">
+    <span><a class="e-toolbaricons e-icon"><i class="fa fa-cog white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="UsersAssigned">
+    <span><a class="e-toolbaricons e-icon"><i class="fa fa-user white-bg"></i></a></span>
+</script> 
+<script type="text/x-jsrender" id="csvExport">
+    <span><a class="e-toolbaricons e-icon"><i class="fa fa-file-excel-o white-bg"></i></a></span>
+</script> 
+@section Scripts{
+    <script type="text/javascript">
+        var loadingGrid = $("div.box").find(".overlay");
+        var GSurvayId, survayTypesModal;
+        $(function() {
+            $("#btn_create").on('click', btnClickEvent.createNewSurvey);
+            $("#btn_create_lang").on('click', btnClickEvent.createNewLanguageSurvey);
+        });
+
+        var btnClickEvent = {
+            createNewSurvey: function() {
+
+                $.confirm({
+                    title: false,
+                    content: "Please select the language",
+                    columnClass: "s",
+                    draggable: true,
+                    type: 'blue',
+                    animationSpeed: 1200,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    closeIcon: true,
+                    closeIconClass: 'fa fa-close',
+                    buttons: {
+                        Sinhala: {
+                            text: 'සිංහල',
+                            btnClass: 'btn-blue',
+                            keys: ['enter', 's'],
+                            action: function() {
+                                window.open(
+                                    '@Url.Action("CreateNew", "Survay", new {language = "1"})',
+                                    '_blank'
+                                );
+                            }
+                        },
+                        English: {
+                            text: 'ENGLISH',
+                            btnClass: 'btn-orange',
+                            keys: ['enter', 'e'],
+                            action: function() {
+                                window.open(
+                                    '@Url.Action("CreateNew", "Survay", new {language = "2"})',
+                                    '_blank'
+                                );
+                            }
+                        },
+                        Temil: {
+                            text: 'தமிழ்',
+                            btnClass: 'btn-green',
+                            keys: ['enter', 't'],
+                            action: function() {
+                                window.open(
+                                    '@Url.Action("CreateNew", "Survay", new {language = "3"})',
+                                    '_blank'
+                                );
+                            }
+                        }
+                    }
+                });
+            },
+
+            createNewLanguageSurvey: function() {
+                $.ajax({
+                    url: "@Url.Action("GetCreatedSurvaysView", "Survay")",
+                    method: "GET"
+                }).done(function(response) {
+                    if (response) {
+                        $.dialog({
+                            title: "Create with new language",
+                            content: response,
+                            columnClass: "s",
+                            draggable: true,
+                            type: 'blue',
+                            animationSpeed: 1200,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close'
+                        });
+                    }
+                });
+            }
+        };
+
+        var toolbarClickEvent = {
+            onClickToolbar: function (sender) {
+                var targetId = sender.itemName;
+                var gridObj = $("#survayGrid").ejGrid("instance");
+                var selectedRow;
+
+                if (targetId === "Edit") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                        $(loadingGrid).removeClass('hidden');
+                        setTimeout(function () {
+                            toolbarClickEvent.onGridEdit(selectedRow);
+                            $(loadingGrid).addClass('hidden');
+                        },
+                            2000);
+
+                        notification("Warning", "please be aware of dependant question !", "warning");
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+
+                } else if (targetId === "refresh") {
+                    gridObj.refreshContent();
+                } else if (targetId === "Delete") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridDelete(selectedRow);
+                    }
+                } else if (targetId === "Activate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridActivate(selectedRow);
+                    }
+                } else if (targetId === 'Dependant') {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridAddDependant(selectedRow);
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+
+                } else if (targetId === 'Settings') {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridSetting(selectedRow);
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+
+                } else if (targetId === 'UsersAssigned') {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridUsersAssign(selectedRow);
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+
+                } else if (targetId === "csvExport") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridExportCsv(selectedRow);
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+                }
+            },
+            onGridEdit: function (row) {
+
+                $(loadingGrid).removeClass('hidden');
+                var survayId = row[0].Id;
+                $.ajax({
+                    url: "@Url.Action("GetCreatedSurvayTypesView", "Survay")",
+                    method: "GET",
+                    data: { survayId: survayId }
+                }).done(function (response) {
+                    if (response) {
+                        $.alert({
+                            icon: 'fa fa-spinner fa-spin',
+                            title:
+                            '<span style="font-size: 13px">Please select already created survay type which you want to edit</span>',
+                            content: response,
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1500,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            columnClass: "s",
+                            type: 'orange',
+                            buttons: {
+                                cancel: {
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                        $(loadingGrid).addClass('hidden');
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        notification("Error", "Error in inserting", "error");
+                        return false;
+                    }
+                    $(loadingGrid).addClass('hidden');
+                    return true;
+                });
+
+            },
+            onGridDelete: function (row) {
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].Id;
+                if (row[0].IsActive === false) {
+                    notification("Error", "Selected survay is already inactive", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    content: 'Are You sure to inactive the survay ?',
+                    type: 'red',
+                    closeIcon: true,
+                    closeIconClass: 'fa fa-close',
+                    animationSpeed: 1500,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                $.ajax({
+                                    url: "@Url.Action("Delete", "Survay")",
+                                    dataType: "json",
+                                    method: "DELETE",
+                                    data: { id: id }
+                                }).done(function (response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly inactive", "success");
+                                    } else {
+                                        notification("Error", "Error in Inactive", "error");
+                                    }
+
+                                    var gridObj = $("#survayGrid").ejGrid("instance");
+                                    gridObj.refreshContent();
+                                    $(loadingGrid).addClass('hidden');
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $(loadingGrid).addClass('hidden');
+                            }
+                        }
+                    }
+                });
+            },
+
+            onGridActivate: function (row) {
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].Id;
+                if (row[0].IsActive === true) {
+                    notification("Error", "Selected survay is already active", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    content: 'Are You sure to re-active the survay ?',
+                    type: 'green',
+                    closeIcon: true,
+                    closeIconClass: 'fa fa-close',
+                    animationSpeed: 1500,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                $.ajax({
+                                    url: "@Url.Action("ReActivate", "Survay")",
+                                    dataType: "json",
+                                    method: "POST",
+                                    data: { id: id }
+                                }).done(function (response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly re-active", "success");
+                                    } else {
+                                        notification("Error", "Error in re-active", "error");
+                                    }
+
+                                    var gridObj = $("#survayGrid").ejGrid("instance");
+                                    gridObj.refreshContent();
+                                    $(loadingGrid).addClass('hidden');
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $(loadingGrid).addClass('hidden');
+                            }
+                        }
+                    }
+                });
+            },
+
+            onGridAddDependant: function (row) {
+                $(loadingGrid).removeClass('hidden');
+
+                GSurvayId = row[0].Id;
+                if (row[0].IsActive === false) {
+                    notification("Error", "Selected survay is inactive, Please make active this first", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.ajax({
+                    url: "@Url.Action("GetCreatedSurvayTypesForDependantView", "Survay")",
+                    method: "GET",
+                    data: { survayId: GSurvayId }
+                }).done(function (response) {
+                    if (response) {
+                        survayTypesModal = $.alert({
+                            title:
+                            '<span style="font-size: 13px">Please select a survay type which you want to add or edit dependant</span>',
+                            content: response,
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1500,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            columnClass: "s",
+                            type: 'orange',
+                            buttons: {
+                                cancel: {
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                        $(loadingGrid).addClass('hidden');
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        notification("Error", "Error occured , pleas try again", "error");
+                    }
+                    $(loadingGrid).addClass('hidden');
+
+                });
+            },
+            onGridSetting: function (row) {
+                $(loadingGrid).removeClass('hidden');
+                var survayId = +row[0].Id;
+
+                $.ajax({
+                    url: "@Url.Action("GetActiveSurvaySettings", "SurvaySetting")",
+                    method: "GET",
+                    data: { survayId: survayId }
+                }).done(function (response) {
+                    if (response) {
+                        var settingModal = $.confirm({
+                            icon: 'fa fa-cog fa-spin',
+                            title: "Apply survay's settings ",
+                            content: response,
+                            columnClass: "m",
+                            draggable: true,
+                            type: 'blue',
+                            animationSpeed: 1500,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            buttons: {
+                                confirm:
+                                {
+                                    btnClass: 'btn-blue',
+                                    action: function () {
+                                        var gridTargets = $("#settingGrid").ejGrid('instance').model.dataSource;
+                                        var tragetstobeSend = [];
+                                        gridTargets.forEach(function (item, index) {
+                                            var id = item.Id;
+                                            if (id > 0) {
+                                                tragetstobeSend.push({
+                                                    Id: +item.Id,
+                                                    SurvaySettingId: survayId,
+                                                    ProvinceId: +item.ProvinceId,
+                                                    DistrictId: +item.DistrictId,
+                                                    Target: +item.Target,
+                                                    OptionId: +item.OptionId,
+                                                    CreatedBy: item.CreatedBy,
+                                                    CreatedDate: item.CreatedDate,
+                                                    IsActive: true
+
+                                                });
+                                            } else {
+                                                tragetstobeSend.push({
+                                                    Id: +item.Id,
+                                                    SurvaySettingId: survayId,
+                                                    ProvinceId: +item.ProvinceId,
+                                                    DistrictId: +item.DistrictId,
+                                                    Target: +item.Target,
+                                                    OptionId: +item.OptionId,
+                                                    IsActive: true
+                                                });
+                                            }
+                                        });
+                                        var sumofTotal = +$("#sumOfTarget").html();
+                                        var total = +$("#allTotal").val();
+
+                                        if (sumofTotal > total) {
+                                            notification("Error", "Allocated targets has been exceeded", "error");
+                                            return false;
+                                        }
+
+                                        var settings = {
+                                            SurvayId: survayId,
+                                            Target: total,
+                                            SurvayTargets: tragetstobeSend
+                                        }
+                                        var checkedSupervisors = [];
+
+                                        var selected = $("#supervisorDiv input[type='checkbox']:checked.e-checkbox");
+                                        $.each(selected,
+                                            function (i, data) {
+                                                checkedSupervisors.push({ SupervisorId: $(data).attr('value'), SurvayId: survayId });
+                                            });
+                                        $.ajax({
+                                            url: "@Url.Action("SaveSurvaySettings", "SurvaySetting")",
+                                            dataType: "json",
+                                            method: "POST",
+                                            data: { settings: JSON.stringify(settings), superviosrs: JSON.stringify(checkedSupervisors) }
+                                        }).done(function (response) {
+                                            if (response.status) {
+                                                notification("Success", "Successfuly Inserted", "success");
+                                                settingModal.close();
+                                            } else {
+                                                notification("Error", "Error in inserting", "error");
+                                            }
+                                            $(loadingGrid).addClass('hidden');
+                                        });
+                                        return false;
+                                    }
+                                },
+                                cancel: {
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                        $(loadingGrid).addClass('hidden');
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        notification("Error", "Error occured , pleas try again", "error");
+                    }
+
+
+                });
+            },
+
+            onGridUsersAssign: function (row) {
+                $(loadingGrid).removeClass('hidden');
+
+                GSurvayId = row[0].Id;
+                if (row[0].IsActive === false) {
+                    notification("Error", "Selected survay is inactive, Please make active this first", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.ajax({
+                    url: "@Url.Action("GetUsersAssignedToSurvay", "Survay")",
+                    method: "GET",
+                    data: { survayId: GSurvayId }
+                }).done(function (response) {
+                    if (response) {
+                        var userSurvayModal  = $.confirm({
+                            icon: 'fa fa-cog fa-spin',
+                            title: "<span style='font-size: 16px'>Assign users to suray - " + row[0].Name+ '</span>',
+                            content: response,
+                            closeIcon: true,
+                            draggable: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1500,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            columnClass: "s",
+                            type: 'blue',
+                            buttons: {
+                                confirm:
+                                {
+                                    text: 'Save',
+                                    btnClass: 'btn-blue',
+                                    action: function () {
+                                        var usersAssignedToSurvay = $("#userSurvayGrid").data("ejGrid").model.dataSource;
+                                        var sendingUsers  = [];
+                                        usersAssignedToSurvay.forEach(function (item, index) {
+                                            sendingUsers.push({
+                                                UserId: item.UserId,
+                                                SurvayId: +GSurvayId
+                                            });
+                                        });
+
+                                        $.ajax({
+                                            url: "@Url.Action("SaveUsersAssignedToSurvay", "Survay")",
+                                            dataType: "json",
+                                            method: "POST",
+                                            data: { model: JSON.stringify(sendingUsers)}
+                                        }).done(function (response) {
+                                            if (response.status) {
+                                                notification("Success", "Successfuly Inserted", "success");
+                                                $(loadingGrid).addClass('hidden');
+                                                userSurvayModal.close();
+                                            } else {
+                                                notification("Error", "Error in inserting", "error");
+                                                return true;
+                                            }
+                                            });
+                                        return false;
+                                    }
+                                },
+                                cancel:
+                                {
+                                    btnClass: 'btn-red',
+                                    action: function () {
+                                        $(loadingGrid).addClass('hidden');
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        notification("Error", "Error occured , pleas try again", "error");
+                    }
+                    $(loadingGrid).addClass('hidden');
+
+                });
+            },
+            onGridExportCsv: function (row) {
+
+                $(loadingGrid).removeClass('hidden');
+
+                GSurvayId = +row[0].Id;
+                if (row[0].IsActive === false) {
+                    notification("Error", "Selected survay is inactive, Please make active this first", "error");
+                    $(loadingGrid).addClass('hidden');
+                    return;
+                }
+                $.ajax({
+                    url: "@Url.Action("CheckAnswerAvailable", "Survay")",
+                    dataType: "json",
+                    method: "GET",
+                    data: { survayId: GSurvayId }
+                }).done(function (response) {
+                    if (response.isAvailable) { 
+                        
+                        var link = '@Url.Action("ExportAnswerToCsv", "Survay", new { survayId = "id" })';
+                        link = link.replace("id", GSurvayId);
+                        location.href = link;
+
+                        setTimeout(function () {
+                            $(loadingGrid).addClass('hidden');
+                        }, 4000);                        
+                    } else {
+                        notification("Warning", response.message, "warning");
+                        $(loadingGrid).addClass('hidden');
+                    }
+                });
+
+            }
+        };
+
+        var gridActionEvent = {
+            onComplete: function() {
+                $(loadingGrid).addClass('hidden');
+            },
+            onBegin: function() {
+
+                $(loadingGrid).removeClass('hidden');
+            },
+            failureMessage: function(args) {
+                notification("Error", "Error occured", "error");
+            }
+        }
+
+    </script>
+}

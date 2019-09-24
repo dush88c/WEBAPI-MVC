@@ -1,0 +1,82 @@
+﻿@model  List<App.Models.AppModel.FieldDependantViewModel>
+
+<div class="row">
+    <div class="col-md-12 form-group">
+        <div id="fieldDependantGrid"></div>
+    </div>
+
+</div>
+
+    <script type="text/javascript">
+        var fieldDependants = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model , new Newtonsoft.Json.JsonSerializerSettings() { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore }));
+        
+        var fields = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Fields, new Newtonsoft.Json.JsonSerializerSettings() { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore }));
+        var dependantTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(EnumHelper.GetSelectList(typeof(SurvayArm.Application.Enum.EnumFieldDependantType))));
+
+        var pageFunHandler = {
+
+            initialize: function () {
+
+                $("#fieldDependantGrid").ejGrid({
+                    editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
+                    toolbarSettings: {
+                        showToolbar: true,
+                        toolbarItems: [
+                            ej.Grid.ToolBarItems.Add, ej.Grid.ToolBarItems.Edit, ej.Grid.ToolBarItems.Delete,
+                            ej.Grid.ToolBarItems.Update, ej.Grid.ToolBarItems.Cancel
+                        ]
+                    },
+                    dataSource: fieldDependants,
+                    actionComplete: pageFunHandler.gridActionComplete,
+                    endEdit: pageFunHandler.gridRecordAddorEdit,
+                    endAdd: pageFunHandler.gridRecordAddorEdit,
+                    isResponsive: true,
+                    columns: [
+                        { field: "Id", isPrimaryKey: true, visible: false },
+                        { field: "DependantType", headerText: 'Dependant Type', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "Value", foreignKeyValue: "Text", dataSource: dependantTypes, validationRules: { required: true }, enableFilterSearch: true },
+                        { field: "FieldId", headerText: 'Question', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "id", foreignKeyValue: "label", dataSource: fields, validationRules: { required: true }, enableFilterSearch: true },
+                        { field: "DependantFieldId", headerText: 'Dependant Question', editType: ej.Grid.EditingType.Dropdown, foreignKeyField: "id", foreignKeyValue: "label", dataSource: fields, validationRules: { required: true }, enableFilterSearch: true },                      
+                        { field: "Value", headerText: 'Value', editType: ej.Grid.EditingType.String },                        
+                        { field: "CreatedBy", visible: false },
+                        { field: "CreatedDate", visible: false },
+                        { field: "IsActive", visible: false }
+                    ]
+                });
+            },
+            gridActionComplete: function (sender) {                
+                if (sender.requestType === "beginedit" || sender.requestType === "add") {
+
+                    var fieldIdDropdown = $("#" + this._id + "FieldId").ejDropDownList('instance'); /* Get the object of FieldId column ejDropDownList */
+                    fieldIdDropdown.option({ enableFilterSearch: true });
+                    var dependantFieldIdDropdown = $("#" + this._id + "DependantFieldId").ejDropDownList('instance'); /* Get the object of DependantFieldId column ejDropDownList */
+                    dependantFieldIdDropdown.option({ enableFilterSearch: true });
+                }
+
+            },
+
+            gridRecordAddorEdit: function (sender) {
+                
+                var dependantList = sender.model.dataSource;
+                var dependant = sender.data;
+                if (dependant.FieldId === dependant.DependantFieldId) {                    
+                    notification("Error", "Dependancy can't be same question", "error");
+                    $("#fieldDependantGrid").ejGrid("startEdit", $("#fieldDependantGrid .e-gridcontent tr").first());
+                    return;
+                }     
+                var dependantsSame  = $.grep(dependantList, function (p) {
+                    return dependant.FieldId === p.FieldId && dependant.DependantFieldId === p.DependantFieldId && p.DependantType === dependant.DependantType;
+                });
+                if (dependantsSame && dependantsSame.length > 1) {
+                    notification("Error", "This dependancy has been already created", "error");
+                    $("#fieldDependantGrid").ejGrid("startEdit", $("#fieldDependantGrid .e-gridcontent tr").first());
+                    return;
+                }
+
+            }
+        };
+            (function () {                
+                pageFunHandler.initialize();
+        })();
+
+           
+    </script>

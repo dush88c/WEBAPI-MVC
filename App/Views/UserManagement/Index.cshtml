@@ -1,0 +1,562 @@
+﻿@using App.Models.AppModel
+@using Syncfusion.JavaScript.Models
+<div class="right_col" role="main">
+
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>User Management</h3>
+            </div>           
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="box no-border">
+                        <div class="box-header with-border">
+                        </div>
+                        <div class="box-body">
+                            @(Html.EJ().Grid<UserViewModel>("UserGrid")
+                          .Datasource(ds => ds.URL(@Url.Action("GetAllUserForGrid", "UserManagement")).Adaptor(AdaptorType.UrlAdaptor))
+                          .AllowPaging()
+                          .AllowSorting()
+                          .IsResponsive(true)
+                          .MinWidth(600)
+                          .ToolbarSettings(toolbar =>
+                          {                              
+                               toolbar.ShowToolbar().CustomToolbarItems(new List<object>
+                                  {
+                                      new CustomToolbarItem {TemplateID = "#AddTemplate", Text = "Add"},
+                                      new CustomToolbarItem {TemplateID = "#EditTemplate", Text = "Update"},
+                                      new CustomToolbarItem {TemplateID = "#DeleteTemplate", Text = "Delete"},
+                                      new CustomToolbarItem {TemplateID = "#refreshTemplate", Text = "Refresh"},
+                                      new CustomToolbarItem {TemplateID = "#pwdChangedTemplate"}
+                                  });                              
+                          })
+                          .EditSettings(edit => { edit.AllowEditOnDblClick(false); })
+                          .ClientSideEvents(evt =>
+                          {
+                              evt.ActionFailure("gridActionEvent.failureMessage");
+                              evt.ToolbarClick("toolbarClickEvent.onClickToolbar");
+                              evt.ActionBegin("gridActionEvent.onBegin");
+                              evt.ActionComplete("gridActionEvent.onComplete");
+                          })
+                          .Columns(col =>
+                          {
+                              col.Field(p => p.Id).Visible(false).IsPrimaryKey(true).Add();
+                              //col.Field(p => p.ProfileUrl).HeaderText("User Image").TextAlign(TextAlign.Left).AllowSorting(true).Template("#profile_coloumnTemplate").Add();
+                              col.Field(p => p.FirstName).HeaderText("First Name").TextAlign(TextAlign.Left).Add();
+                              col.Field(p => p.LastName).HeaderText("Last Name").TextAlign(TextAlign.Left).Add();
+                              col.Field(p => p.Email).HeaderText("Email").TextAlign(TextAlign.Left).Add();
+                              col.Field(p => p.AddressLine01).HeaderText("Address Line 01").TextAlign(TextAlign.Left).AllowSorting(false).Add();
+                              col.Field(p => p.AddressLine02).HeaderText("Address Line 02").TextAlign(TextAlign.Left).AllowSorting(false).Add();
+                              col.Field(p => p.City).HeaderText("City").TextAlign(TextAlign.Left).AllowSorting(false).Add();
+                              col.Field(p => p.MobileNumber).HeaderText("Mobile Number").TextAlign(TextAlign.Left).Add();
+                              col.Field(p => p.HomePhoneNumber).HeaderText("Home Phone Number").TextAlign(TextAlign.Left).AllowSorting().Add();
+                             // col.Field(p => p.BirthOfDateDisplayName).HeaderText("Birth of Date").TextAlign(TextAlign.Left).Format("{0:MM/dd/yyyy}").AllowSorting(false).Add();
+                              col.Field(p => p.IsActive).HeaderText("Is Active").Template("#IsActiveTemplate").TextAlign(TextAlign.Left).Add();
+                          }))
+                        </div>
+                        <div class="overlay">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/x-jsrender" id="IsActiveTemplate">
+
+    {{if IsActive == true}}
+    <span class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok"></i></span>
+    {{else IsActive == false}}
+    <span class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></span>
+    {{/if}}
+</script>
+<script type="text/x-jsrender" id="AddTemplate">
+    <span id="addSri" title="Add New User"><a class="e-toolbaricons e-icon"><i class="fa fa-user-plus white-bg"></i></a></span>
+</script>
+
+<script type="text/x-jsrender" id="EditTemplate">
+    <span id="editSri" title="Edit User"><a class="e-toolbaricons e-icon"><i class="fa fa-pencil white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="refreshTemplate">
+    <span id="refresh" title="Refresh"><a class="e-toolbaricons e-icon"><i class="fa fa-refresh white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="DeleteTemplate">
+    <span id="deleteTemplate" title="Delete"><a class="e-toolbaricons e-icon"><i class="fa fa-user-times white-bg"></i></a></span>
+</script>
+<script type="text/x-jsrender" id="pwdChangedTemplate">
+    <span id="pwdChangedTemplate" title="Change Password"><a class="e-toolbaricons e-icon"><i class="fa fa-user-secret white-bg"></i></a></span>
+</script>
+
+
+@section Scripts{
+
+    <script type="text/x-jsrender" id="profile_coloumnTemplate">
+        <img style="width: 75px; height: 70px ; border-radius: 50%" src="/Content/dist/img/user2-160x160.jpg" alt="{{:FirstName  }} + {{: LastName}}" />
+    </script>
+
+
+    <script type="text/javascript">
+
+        var loadingGrid = $("div.box").find(".overlay");
+        var userAddModal;
+        var userUpdateModal;
+
+        var toolbarClickEvent = {
+            onClickToolbar: function(sender) {
+
+                var targetId = sender.itemName;
+                var gridObj = $("#UserGrid").ejGrid("instance");
+                var selectedRow;
+
+                if (targetId === "AddTemplate") {
+
+                    toolbarClickEvent.onGridAdd();
+
+                } else if (targetId === "EditTemplate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridEdit(selectedRow);
+                    } else {
+                        notification("Error", "Please select a record", "error");
+                    }
+
+                } else if (targetId === "refreshTemplate") {
+                    gridObj.refreshContent();
+                } else if (targetId === "DeleteTemplate") {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select a record", "error");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridDelete(selectedRow);
+                    }
+                    gridObj.refreshContent();
+                } else if (targetId === 'pwdChangedTemplate') {
+                    selectedRow = gridObj.getSelectedRecords();
+                    if (selectedRow.length === 0) {
+                        notification("Error", "Please select an user","error");
+                        return;
+                    }
+                    if (selectedRow[0].IsActive === false) {
+                        notification("Error", "Selected user is inactive , please select a right user","notice");
+                        return;
+                    }
+                    if (selectedRow.length > 0) {
+                        toolbarClickEvent.onGridChangePwd(selectedRow);
+                    }
+                    gridObj.refreshContent();
+                }
+
+            },
+            onGridAdd: function() {
+
+                $(loadingGrid).removeClass('hidden');
+                $.ajax({
+                    url: "@Url.Action("GetLoaddedAddView", "UserManagement")",
+                    //dataType: "json",
+                    method: "GET"
+
+                }).done(function(response) {
+
+                    userAddModal = $.dialog({
+                            title: "User Creating",
+                            type: 'blue',
+                            columnClass: "l",
+                            content: response,
+                            closeIcon: true,
+                            draggable: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1000,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            onOpen: function() {
+                                $(loadingGrid).addClass('hidden');
+                                intializeUserAddView();
+                            }
+                        }
+                    );
+                }, function() {
+                    $(loadingGrid).addClass('hidden');
+                });
+
+            },
+            onGridEdit: function(row) {
+
+                $(loadingGrid).removeClass('hidden');
+                $.ajax({
+                    url: "@Url.Action("GetLoaddedEditorView", "UserManagement")",
+                    //dataType: "json",
+                    method: "GET",
+                    data: { id: row[0].Id }
+
+                }).done(function(response) {
+                    $(loadingGrid).addClass('hidden');
+
+                    userUpdateModal = $.dialog({
+                            title: "Edit User  - " + row[0].FirstName + " " + row[0].LastName,
+                            type: 'blue',
+                            columnClass: "l",
+                            closeIcon: true,
+                            draggable: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1000,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            content: response,
+                            onOpen: function() {
+                                intializeUserEditView();
+                            }
+                        }
+                    );
+                });
+
+            },
+            onGridDelete: function(row) {
+                $(loadingGrid).removeClass('hidden');
+                var id = row[0].Id;
+                if (row[0].IsActive === false) {
+                    notification("Error", "Selected user is already inactive", "error");
+                    return;
+                }
+                $.confirm({
+                    icon: 'fa fa-spinner fa-spin',
+                    title: 'Confirm!',
+                    content: 'Are You sure to inactive the user ?',
+                    closeIcon: true,
+                    draggable: true,
+                    closeIconClass: 'fa fa-close',
+                    animationSpeed: 1000,
+                    animation: 'top',
+                    closeAnimation: 'bottom',
+                    buttons: {
+                        confirm:
+                        {
+                            btnClass: 'btn-blue',
+                            action: function() {
+                                $.ajax({
+                                    url: "@Url.Action("Delete", "UserManagement")",
+                                    dataType: "json",
+                                    method: "DELETE",
+                                    data: { id: id }
+                                }).done(function(response) {
+                                    if (response.status) {
+                                        notification("Success", "Successfuly deleted","");
+                                    } else {
+                                        notification("Error", "Error in deleting","error");
+                                    }
+
+                                    var gridObj = $("#UserGrid").ejGrid("instance");
+                                    gridObj.refreshContent();
+                                    $(loadingGrid).addClass('hidden');
+
+                                });
+                            }
+                        },
+                        cancel: {
+                            btnClass: 'btn-red',
+                            action: function() {
+                                $(loadingGrid).addClass('hidden');
+                            }
+                        }
+                    }
+                });
+                $(loadingGrid).addClass('hidden');
+            },
+
+            onGridChangePwd : function(row) {
+                 $(loadingGrid).removeClass('hidden');
+                $.ajax({
+                    url: "@Url.Action("GetLoaddedPwdEditorView", "UserManagement")",
+                    //dataType: "json",
+                    method: "GET",
+                    data: { id: row[0].Id }
+
+                }).done(function(response) {
+                    $(loadingGrid).addClass('hidden');
+
+                    userPwdUpdateModal = $.dialog({
+                            title: "Reset user Password for  - " + row[0].FirstName + " " + row[0].LastName,
+                            type: 'red',
+                            columnClass: "m",
+                            closeIcon: true,
+                            draggable: true,
+                            closeIconClass: 'fa fa-close',
+                            animationSpeed: 1000,
+                            animation: 'top',
+                            closeAnimation: 'bottom',
+                            content: response
+
+                        }
+                    );
+                });
+            }
+
+
+        };
+        var gridActionEvent = {
+            onComplete: function() {
+                $(loadingGrid).addClass('hidden');
+            },
+            onBegin: function() {
+
+                $(loadingGrid).removeClass('hidden');
+            },
+            failureMessage: function(args) {
+                notification("Error", "Error occured" ,"error");
+            },
+
+            onClickSaveBtn: function(formData) {
+
+                var firstName = formData.find("input[id='firstName']").val();
+                var lastName = formData.find("input[id='lastName']").val();
+                var email = formData.find("input[id='email']").val();
+                var addressLine01 = formData.find("input[id='addressLine01']").val();
+                var addressLine02 = formData.find("input[id='addressLine02']").val();
+                var city = formData.find("input[id='city']").val();
+                var mobileNo = formData.find("input[id='mobileNo']").val();
+                var password = formData.find("input[id='password']").val();
+                var reTryPassword = formData.find("input[id='reTryPassword']").val();
+                var phoneNo = formData.find("input[id='phoneNo']").val();
+                var birthOfDate = $("#birthOfDate").data("ejDatePicker").getValue();
+
+                if (!firstName) {
+                    notification("Error", "Please file your first name","error");
+                    return;
+                }
+                if (!lastName) {
+                    notification("Error", "Please file your last name","error");
+                    return;
+                }
+                var re = /[A-Z0-9._%+-]+@@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+                if (!re.test(email)) {
+                    notification("Error", "Email is invalid", "error");
+                    return;
+
+                }
+                if (!addressLine01) {
+                    notification("Error", "Please file your address line 1", "error");
+                    return;
+                }
+                if (!city) {
+
+                    notification("Error", "Please fill your City", "error");
+                    return;
+
+                }
+                if (!mobileNo) {
+                    notification("Error", "Please file Mobile number", "error");
+                    return;
+                }
+                if (!birthOfDate) {
+                    notification("Error", "Please fill Birth of date", "error");
+                    return;
+                }
+
+                if (!password) {
+                    notification("Error", "Please type user pssword", "error");
+                    return;
+                }
+                if (!reTryPassword) {
+                    notification("Error", "Please type re-type password", "error");
+                    return;
+                }
+
+                var regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$/;
+                if (regularExpression.test(password) && regularExpression.test(reTryPassword)) {
+                    if (password !== reTryPassword) {
+                        notification("Error", "The password you entered is not matched", "error");
+                        return;
+
+                    }
+                } else {
+                    notification("Error", "The password is not strength, password should conatin at least one upper letter ,lower letter, number and special charactor, and also length should be more than 5", "error");
+                    return;
+                }
+
+                var model = {
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Email: email,
+                    Password: password,
+                    CIty: city,
+                    AddressLine01: addressLine01,
+                    AddressLine02: addressLine02,
+                    HomePhoneNumber: phoneNo,
+                    MobileNumber: mobileNo,
+                    BirthOfDate: birthOfDate
+                }
+
+                $.ajax({
+                    url: "@Url.Action("Create", "UserManagement")",
+                    dataType: "json",
+                    method: "POST",
+                    data: { model: JSON.stringify(model) }
+                }).done(function(response) {
+
+                    if (response.status) {
+                        userAddModal.close();
+                        notification("Success", "Successfuly inserted","success");
+                        var gridObj = $("#UserGrid").data("ejGrid");
+                        gridObj.refreshContent();
+                    } else {
+                        notification("Error", response.message, "error");
+                    }
+                });
+            },
+
+            onClickUpdateBtn: function(formData) {
+
+                var firstName = formData.find("input[id='firstName']").val();
+                var lastName = formData.find("input[id='lastName']").val();
+                var email = formData.find("input[id='email']").val();
+                var addressLine01 = formData.find("input[id='addressLine01']").val();
+                var addressLine02 = formData.find("input[id='addressLine02']").val();
+                var city = formData.find("input[id='city']").val();
+                var mobileNo = formData.find("input[id='mobileNo']").val();
+                var phoneNo = formData.find("input[id='phoneNo']").val();
+                var birthOfDate = $("#birthOfDate").data("ejDatePicker").getValue();
+                var id = formData.find("input[id='Id']").val();
+                var isActive = $(formData.find("input[id='isActive']")[0]).prop('checked');
+                //var createdDate = formData.find("input[id='CreatedDate']").val();
+                //var createdBy = formData.find("input[id='CreatedBy']").val();
+                //var password = formData.find("input[id='Password']").val();
+                //var passwordHash = formData.find("input[id='PasswordHash']").val();
+
+                if (!firstName) {
+                    notification("Error", "Please file your first name", "error");
+                    return;
+                }
+                if (!lastName) {
+                    notification("Error", "Please file your last name", "error");
+                    return;
+                }
+                var re = /[A-Z0-9._%+-]+@@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+                if (!re.test(email)) {
+                    notification("Error", "Email is invalid", "error");
+                    return;
+
+                }
+                if (!addressLine01) {
+                    notification("Error", "Please file your address line 1", "error");
+                    return;
+                }
+                if (!city) {
+                    notification("Error", "Please fill your City", "error");
+                    return;
+
+                }
+                if (!mobileNo) {
+                    notification("Error", "Please file Mobile number", "error");
+                    return;
+                }
+                if (!birthOfDate) {
+                    notification("Error", "Please fill Birth of date", "error");
+                    return;
+                }
+
+                var model = {
+                    Id: id,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Email: email,
+                    CIty: city,
+                    AddressLine01: addressLine01,
+                    AddressLine02: addressLine02,
+                    HomePhoneNumber: phoneNo,
+                    MobileNumber: mobileNo,
+                    BirthOfDate: birthOfDate,
+                    IsActive : isActive
+
+                }
+
+                $.ajax({
+                    url: "@Url.Action("Update", "UserManagement")",
+                    dataType: "json",
+                    method: "POST",
+                    data: { model: JSON.stringify(model) }
+                }).done(function(response) {
+
+                    if (response.status) {
+                        userUpdateModal.close();
+                        notification("Success", "Successfuly updated","success");
+                        var gridObj = $("#UserGrid").data("ejGrid");
+                        gridObj.refreshContent();
+                    } else {
+                        notification("Error", response.message, "error");
+                    }
+                });
+            },
+
+            onClickPwdChangeSaveBtn: function (formData) {
+
+                var confirmedPwd = formData.find("input[id='confirmedPwd']").val();
+                var pwd = formData.find("input[id='pwd']").val();
+                var email = formData.find("input[id='email']").val();
+                var token = formData.find("input[id='Token']").val();
+
+                if (!pwd) {
+                    notification("Error", "Please type user pssword", "error");
+                    return;
+                }
+                if (!confirmedPwd) {
+                    notification("Error", "Please type re-type password", "error");
+                    return;
+                }
+
+                var regularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$/;
+                if (regularExpression.test(pwd) && regularExpression.test(confirmedPwd)) {
+                    if (pwd !== confirmedPwd) {
+                        notification("Error", "The password you entered is not matched", "error");
+                        return;
+
+                    }
+                } else {
+                    notification("Error", "The password is not strength, password should conatin at least one upper letter ,lower letter, number and special charactor, and also length should be more than 5", "error");
+                    return;
+                }
+                var model = {
+                    Email: email,
+                    Password: pwd,
+                    ConfirmPassword: confirmedPwd,
+                    Token : token
+                }
+
+                $.ajax({
+                    url: "@Url.Action("ResetPassword", "UserManagement")",
+                    dataType: "json",
+                    method: "POST",
+                    data: { model: JSON.stringify(model) }
+                }).done(function(response) {
+
+                    if (response.status) {
+                        userPwdUpdateModal.close();
+                        notification("Success", "Password successfully updated", "success");
+                        var gridObj = $("#UserGrid").data("ejGrid");
+                        gridObj.refreshContent();
+                    } else {
+                        notification("Error", response.message, "error");
+                    }
+                });
+
+            }
+
+        };
+
+        (function () {
+            if ($('aside.main-sidebar ul li').hasClass("active")) {
+                $(this).removeClass('active');
+            }
+            var action = $('aside.main-sidebar ul li ul').find("li[id='userMang_treeview']");
+            $(action).addClass("active");
+            $(action).parents('ul li.treeview').addClass('active');
+        })();
+
+    </script>
+}
